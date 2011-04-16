@@ -1,0 +1,131 @@
+solution "Lithium"
+	configurations { "Debug", "Release" }
+	includedirs
+	{
+		"./",
+		"C:/Users/Don/Documents/Visual Studio 2008/Projects/basis_branch_01",
+		"C:/Users/Don/Documents/Visual Studio 2010/Projects/RechargeableTemplate",
+		"Libs/Common/Src"
+	}
+	
+	configuration "Debug"
+		targetdir "SDK/Debug"
+		defines { "DEBUG" }
+		flags { "Symbols" }
+
+	configuration "Release"
+		targetdir "SDK/Release"
+		defines { "NDEBUG" }
+		flags { "Optimize" }
+
+	-- Core project
+	project "Lithium.Core"
+		language "C++"
+		kind "StaticLib"
+		location "Libs/Core/Build"
+		files 
+		{
+			-- Header Files
+			"Lithium/LithiumCore.hpp",
+			"Lithium/LithiumCoreLIB.hpp",
+			"Lithium/ObjectSystem/*.hpp",
+			"Lithium/Mathematics/*.hpp",
+			"Lithium/System/*.hpp",
+
+			-- Source Files
+			"Libs/Common/Src/*.hpp",
+			"Libs/Core/Src/*.cpp",
+			"Libs/Core/Src/*.hpp",
+			"Libs/Core/Src/Windows/*.cpp"
+		}
+--[[
+
+	-- Graphics project
+	project "Lithium.Graphics"
+		language "C++"
+		kind "StaticLib"
+		location "Libs/Graphics/Build"
+		files
+		{
+			-- Header files
+			"Lithium/LithiumGraphics.hpp",
+			"Lithium/LithiumGraphicsLIB.hpp",
+
+			-- Source Files
+			"Libs/Graphics/Src/*.cpp",
+			"Libs/Graphics/Src/*.hpp"
+		}
+		links
+		{
+			"Lithium.Core"
+		}
+
+]]--
+
+	-- Network project
+	project "Lithium.Network"
+		language "C++"
+		kind "StaticLib"
+		location "Libs/Network/Build"
+		files
+		{
+			-- Header files
+			"Lithium/LithiumNetwork.hpp",
+			"Lithium/LithiumNetworkLIB.hpp",
+			"Lithium/Network/*.hpp",
+			"Lithium/Web/*.hpp",
+
+			-- Source Files
+			"Libs/Network/Src/*.cpp",
+			"Libs/Network/Src/*.hpp",
+			"Libs/Network/Src/Windows/*.cpp"
+		}
+
+	-- Application project
+	project "Lithium.Application"
+		language "C++"
+		kind "WindowedApp"
+		location "Libs/Application/Build"
+		files
+		{
+			-- Header Files
+			"Lithium/LithiumApplication.hpp",
+			"Lithium/LithiumApplicationLIB.hpp",
+			"Lithium/Application/*.hpp",
+			"Lithium/Input/*.hpp",
+
+			-- Source Files
+			"Libs/Application/Src/*.cpp",
+			"Libs/Application/Src/*.hpp",
+			"Libs/Application/Src/Windows/*.cpp"
+		}
+		links
+		{
+			"OpenGL32",
+			"XInput",
+			"wsock32",
+			"ws2_32",
+			"Lithium.Core",
+			--"Lithium.Graphics",
+			"Lithium.Network"
+		}
+
+--[[
+	-- Example project
+	project "Test.Application"
+		language "C++"
+		kind "WindowedApp"
+		location "Examples/Test/Build"
+		files
+		{
+			-- Source Files
+			"Examples/Test/Src/*.cpp",
+			"Examples/Test/Src/*.hpp"
+		}
+		links
+		{
+			"Lithium.Core",
+			--"Lithium.Graphics",
+			"Lithium.Application"
+		}
+]]--
