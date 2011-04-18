@@ -203,6 +203,9 @@ void HttpServer::getGamePad(HttpRequest& request, TcpSocket& connection, const s
 		const PlayerIndex::Enum player = (PlayerIndex::Enum)index;
 		const GamePadState& gamePad = GamePad::getState(player);
 
+		// Create the response
+		HttpResponse response(HttpStatus::Ok);
+
 		if (request.getMethod() == HttpMethod::Post)
 		{
 			// Get the request
@@ -235,14 +238,14 @@ void HttpServer::getGamePad(HttpRequest& request, TcpSocket& connection, const s
 			root["rightThumbstick"]["x"] = (float)rightThumbstick.x();
 			root["rightThumbstick"]["y"] = (float)rightThumbstick.y();
 
-			// Send the response
-			HttpResponse response(HttpStatus::Ok);
-
+			// Add the json to the response
 			response.getBody() << root;
 
 			response.addField("Content-Type", "application/json");
-			sendResponse(connection, response);
 		}
+
+		// Send the response
+		sendResponse(connection, response);
 	}
 	else
 	{
