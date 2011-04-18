@@ -1,5 +1,5 @@
 /**
- * \file Includes.hpp
+ * \file VertexShader.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,17 +23,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_SYSTEM_INCLUDES_HPP
-#define LITHIUM_SYSTEM_INCLUDES_HPP
+#ifndef LITHIUM_VERTEX_SHADER_HPP_INCLUDED
+#define LITHIUM_VERTEX_SHADER_HPP_INCLUDED
 
-#include <cstdint>
-#include <string>
-#include <map>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <fstream>
+#include <Lithium/Graphics/Shader.hpp>
 
-#include <Lithium/System/Debug.hpp>
+namespace Lithium
+{
+	class VertexShader : public Shader
+	{
 
-#endif // end LITHIUM_SYSTEM_INCLUDES_HPP
+	} ; // end class VertexShader
+
+} // end namespace Lithium
+
+#endif // end LITHIUM_VERTEX_SHADER_HPP_INCLUDED

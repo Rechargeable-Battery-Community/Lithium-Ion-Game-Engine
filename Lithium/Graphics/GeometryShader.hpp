@@ -1,5 +1,5 @@
 /**
- * \file Includes.hpp
+ * \file GeometryShader.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,17 +23,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_SYSTEM_INCLUDES_HPP
-#define LITHIUM_SYSTEM_INCLUDES_HPP
+#ifndef LITHIUM_GEOMETRY_SHADER_HPP_INCLUDED
+#define LITHIUM_GEOMETRY_SHADER_HPP_INCLUDED
 
-#include <cstdint>
-#include <string>
-#include <map>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <fstream>
+#include <Lithium/Graphics/GraphicsResource.hpp>
 
-#include <Lithium/System/Debug.hpp>
+namespace Lithium
+{
+	class GeometryShader : public Shader
+	{
 
-#endif // end LITHIUM_SYSTEM_INCLUDES_HPP
+	} ; // end class GeometryShader
+
+} // end namespace Lithium
+
+#endif // end LITHIUM_GEOMETRY_SHADER_HPP_INCLUDED

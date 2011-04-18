@@ -38,7 +38,6 @@ solution "Lithium"
 			"Libs/Core/Src/*.hpp",
 			"Libs/Core/Src/Windows/*.cpp"
 		}
---[[
 
 	-- Graphics project
 	project "Lithium.Graphics"
@@ -50,17 +49,18 @@ solution "Lithium"
 			-- Header files
 			"Lithium/LithiumGraphics.hpp",
 			"Lithium/LithiumGraphicsLIB.hpp",
+			"Lithium/Graphics/*.hpp",
 
 			-- Source Files
 			"Libs/Graphics/Src/*.cpp",
-			"Libs/Graphics/Src/*.hpp"
+			"Libs/Graphics/Src/*.hpp",
+			"Libs/Graphics/Src/*.c",
+			"Libs/Graphics/Src/*.h"
 		}
 		links
 		{
 			"Lithium.Core"
 		}
-
-]]--
 
 	-- Network project
 	project "Lithium.Network"
@@ -79,6 +79,46 @@ solution "Lithium"
 			"Libs/Network/Src/*.cpp",
 			"Libs/Network/Src/*.hpp",
 			"Libs/Network/Src/Windows/*.cpp"
+		}
+		links
+		{
+			"Lithium.Network"
+		}
+
+	-- Http project
+	project "Lithium.HttpServer"
+		language "C++"
+		kind "StaticLib"
+		location "Libs/HttpServer/Build"
+		files
+		{
+			-- Header files
+			"Lithium/Web/HttpServer.hpp",
+
+			-- Source files
+			"Libs/HttpServer/Src/*.cpp",
+			"Libs/HttpServer/Src/*.inl",
+			"Libs/HttpServer/Src/json/*.h"
+		}
+
+
+	-- OpenGL 3.x device project
+	project "Lithium.OpenGL3Device"
+		language "C++"
+		kind "StaticLib"
+		location "Libs/OpenGL3Device/Build"
+		files
+		{
+			-- Header files
+			"Lithium/Graphics/GraphicsDevice.hpp",
+			
+			-- Source files
+			"Libs/OpenGL3Device/Src/*.cpp",
+			"Libs/OpenGL3Device/Src/*.hpp"
+		}
+		links
+		{
+			"Lithium.Graphics"
 		}
 
 	-- Application project
@@ -106,8 +146,10 @@ solution "Lithium"
 			"wsock32",
 			"ws2_32",
 			"Lithium.Core",
-			--"Lithium.Graphics",
-			"Lithium.Network"
+			"Lithium.Graphics",
+			"Lithium.Network",
+			"Lithium.OpenGL3Device",
+			"Lithium.HttpServer"
 		}
 
 --[[

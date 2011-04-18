@@ -1,2 +1,8 @@
+# Visual Studio files
 Lithium.sln
 Lithium.sdf
+
+# Visual Studio 2010 Intellisense directory
+ipch
+
+Examples

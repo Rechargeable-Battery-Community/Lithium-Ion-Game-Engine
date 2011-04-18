@@ -1,5 +1,5 @@
 /**
- * \file Includes.hpp
+ * \file VertexShaderBinding.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,17 +23,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_SYSTEM_INCLUDES_HPP
-#define LITHIUM_SYSTEM_INCLUDES_HPP
+#ifndef LITHIUM_VERTEX_SHADER_BINDING_HPP_INCLUDED
+#define LITHIUM_VERTEX_SHADER_BINDING_HPP_INCLUDED
 
-#include <cstdint>
-#include <string>
-#include <map>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <fstream>
+#include "GLPlatform.hpp"
 
-#include <Lithium/System/Debug.hpp>
+namespace Lithium
+{
+	/**
+	 * Represents the binding of a vertex shader to OpenGL.
+	 *
+	 * \author Don Olmstead
+	 * \version 0.1
+	 */
+	struct VertexShaderBinding
+	{
+		/// Identifier for the binding in OpenGL
+		GLuint id;
 
-#endif // end LITHIUM_SYSTEM_INCLUDES_HPP
+	} ; // end struct VertexShaderBinding
+
+} // end namespace Lithium
+
+#endif // end LITHIUM_VERTEX_SHADER_BINDING_HPP_INCLUDED

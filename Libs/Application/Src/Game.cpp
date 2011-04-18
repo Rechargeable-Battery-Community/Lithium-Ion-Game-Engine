@@ -31,25 +31,25 @@
 #include <Lithium/Network/Socket.hpp>
 #include <Lithium/Web/HttpRequest.hpp>
 #include <Lithium/Web/WebRequest.hpp>
-#include <Lithium/Application/HttpServer.hpp>
+#include <Lithium/Web/HttpServer.hpp>
 #include <Lithium/Input/GamePad.hpp>
-using namespace Lithium;
 
-#include <sstream>
+#include <Lithium/Graphics/EffectPass.hpp>
+using namespace Lithium;
 
 Game* Game::instance = 0;
 
 TcpSocket __socket;
 HttpServer* __server;
 
+EffectPass* __effectPass;
+VertexShader* __vertexShader;
+PixelShader* __pixelShader;
+
 //---------------------------------------------------------------------
 
 Game::Game()
-: _window(0)
-, _windowWidth(640)
-, _windowHeight(480)
-, _fullScreen(false)
-, _resizeable(true)
+: _graphicsDevice(0)
 , _gameWindow(0)
 { }
 
@@ -65,7 +65,29 @@ Game::~Game()
 
 void Game::initialize()
 {
+	// Initialize the timer
 	Time::initialize();
+
+	// Create the graphics device
+	_graphicsDevice = new GraphicsDevice();
+
+	// Set the viewport
+	Viewport viewport(0, 0, _gameWindow->getWidth(), _gameWindow->getHeight());
+	_graphicsDevice->setViewport(viewport);
+
+	/*
+	__vertexShader = new VertexShader();
+	__pixelShader = new PixelShader();
+
+	_graphicsDevice->createVertexShader(__vertexShader);
+	_graphicsDevice->createPixelShader(__pixelShader);
+	
+	__effectPass = new EffectPass();
+	__effectPass->setVertexShader(__vertexShader);
+	__effectPass->setPixelShader(__pixelShader);
+
+	_graphicsDevice->createEffectPass(__effectPass);
+	*/
 
 	// \todo REMOVE
 	__server = new HttpServer(8001);
@@ -87,4 +109,11 @@ void Game::update()
 
 	// \todo REMOVE
 	__server->update();
+}
+
+//---------------------------------------------------------------------
+
+void Game::draw()
+{
+	_graphicsDevice->clear();
 }

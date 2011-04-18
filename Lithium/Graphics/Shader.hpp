@@ -1,5 +1,5 @@
 /**
- * \file Includes.hpp
+ * \file Shader.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,17 +23,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_SYSTEM_INCLUDES_HPP
-#define LITHIUM_SYSTEM_INCLUDES_HPP
+#ifndef LITHIUM_SHADER_HPP_INCLUDED
+#define LITHIUM_SHADER_HPP_INCLUDED
 
-#include <cstdint>
-#include <string>
-#include <map>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <fstream>
+#include <Lithium/Graphics/GraphicsResource.hpp>
 
-#include <Lithium/System/Debug.hpp>
+namespace Lithium
+{
+	class Shader : public GraphicsResource
+	{
+		protected:
 
-#endif // end LITHIUM_SYSTEM_INCLUDES_HPP
+			Shader();
+
+		public:
+
+			virtual ~Shader();
+
+		public:
+
+			std::istream& getSource()
+			{
+				return _source;
+			}
+
+		private:
+
+			std::stringstream _source;
+
+	} ; // end class Shader
+
+} // end namespace Lithium
+
+#endif // end LITHIUM_SHADER_HPP_INCLUDED

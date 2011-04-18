@@ -1,5 +1,5 @@
 /**
- * \file Includes.hpp
+ * \file Texture.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,17 +23,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_SYSTEM_INCLUDES_HPP
-#define LITHIUM_SYSTEM_INCLUDES_HPP
+#ifndef LITHIUM_TEXTURE_HPP_INCLUDED
+#define LITHIUM_TEXTURE_HPP_INCLUDED
 
-#include <cstdint>
-#include <string>
-#include <map>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <fstream>
+#include <Lithium/Graphics/GraphicsResource.hpp>
 
-#include <Lithium/System/Debug.hpp>
+namespace Lithium
+{
+	class Texture : public GraphicsResource
+	{
+		protected:
 
-#endif // end LITHIUM_SYSTEM_INCLUDES_HPP
+			/**
+			 * Creates an instance of the Texture class.
+			 */
+			Texture();
+
+		public:
+
+			/**
+			 * Destroys an instnace of the Texture class.
+			 */
+			virtual ~Texture();
+
+	} ; // end class Texture
+
+} // end namespace Lithium
+
+#endif // end LITHIUM_TEXTURE_HPP_INCLUDED

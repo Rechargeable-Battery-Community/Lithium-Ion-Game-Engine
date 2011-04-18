@@ -1,5 +1,5 @@
 /**
- * \file Includes.hpp
+ * \file GraphicsResource.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,17 +23,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_SYSTEM_INCLUDES_HPP
-#define LITHIUM_SYSTEM_INCLUDES_HPP
+#include <Lithium/Graphics/GraphicsResource.hpp>
+using namespace Lithium;
 
-#include <cstdint>
-#include <string>
-#include <map>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <fstream>
+//---------------------------------------------------------------------
 
-#include <Lithium/System/Debug.hpp>
+GraphicsResource::GraphicsResource()
+: _device(0)
+, _binding(0)
+{ }
 
-#endif // end LITHIUM_SYSTEM_INCLUDES_HPP
+//---------------------------------------------------------------------
+
+GraphicsResource::~GraphicsResource()
+{ }
+
+//---------------------------------------------------------------------
+
+void GraphicsResource::setDevice(GraphicsDevice* device, void* binding)
+{
+	_device = device;
+	_binding = binding;
+}

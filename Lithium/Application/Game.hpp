@@ -32,6 +32,7 @@
 #include <Lithium/Input/MouseButtons.hpp>
 #include <Lithium/Input/Keys.hpp>
 #include <Lithium/Input/KeyState.hpp>
+#include <Lithium/Graphics/GraphicsDevice.hpp>
 
 namespace Lithium
 {
@@ -60,11 +61,6 @@ namespace Lithium
 
 			void draw();
 
-			inline std::int32_t getWindow() const
-			{
-				return _window;
-			}
-
 			/// The instance of the Game class
 			static Game* instance;
 
@@ -77,17 +73,7 @@ namespace Lithium
 
 		private:
 
-			/// The handle to the window
-			std::int32_t _window;
-			/// The width of the window
-			std::int32_t _windowWidth;
-			/// The height of the window
-			std::int32_t _windowHeight;
-			/// Whether the window is fullscreen
-			bool _fullScreen;
-			/// Whether the window is resizeable
-			bool _resizeable;
-
+			GraphicsDevice* _graphicsDevice;
 			GameWindow* _gameWindow;
 
 			std::int32_t createWindow();

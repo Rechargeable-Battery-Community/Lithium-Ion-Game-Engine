@@ -1,5 +1,5 @@
 /**
- * \file Includes.hpp
+ * \file EffectPass.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,17 +23,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_SYSTEM_INCLUDES_HPP
-#define LITHIUM_SYSTEM_INCLUDES_HPP
+#include <Lithium/Graphics/EffectPass.hpp>
+using namespace Lithium;
 
-#include <cstdint>
-#include <string>
-#include <map>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <fstream>
+//---------------------------------------------------------------------
 
-#include <Lithium/System/Debug.hpp>
+EffectPass::EffectPass()
+{ }
 
-#endif // end LITHIUM_SYSTEM_INCLUDES_HPP
+//---------------------------------------------------------------------
+
+void EffectPass::setVertexShader(VertexShader* shader)
+{
+	_vertexShader = shader;
+}
+
+//---------------------------------------------------------------------
+
+void EffectPass::setPixelShader(PixelShader* shader)
+{
+	_pixelShader = shader;
+}
+
+//---------------------------------------------------------------------
+
+void EffectPass::setGeometryShader(GeometryShader* shader)
+{
+	_geometryShader = shader;
+}

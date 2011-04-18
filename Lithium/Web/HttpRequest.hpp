@@ -74,6 +74,11 @@ namespace Lithium
 
 			void write(std::ostream& output) const;
 
+			std::stringstream& getBody()
+			{
+				return _body;
+			}
+
 		private:
 
 			friend class WebRequest;

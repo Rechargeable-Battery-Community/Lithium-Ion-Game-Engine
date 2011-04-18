@@ -1,5 +1,5 @@
 /**
- * \file Includes.hpp
+ * \file Viewport.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,17 +23,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_SYSTEM_INCLUDES_HPP
-#define LITHIUM_SYSTEM_INCLUDES_HPP
+#include <Lithium/Graphics/Viewport.hpp>
+using namespace Lithium;
 
-#include <cstdint>
-#include <string>
-#include <map>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <fstream>
+//---------------------------------------------------------------------
 
-#include <Lithium/System/Debug.hpp>
-
-#endif // end LITHIUM_SYSTEM_INCLUDES_HPP
+Viewport::Viewport(std::int32_t x, std::int32_t y, std::int32_t width, std::int32_t height)
+: _x(x)
+, _y(y)
+, _width(width)
+, _height(height)
+, _minDepth(0.0f)
+, _maxDepth(1.0f)
+{ }

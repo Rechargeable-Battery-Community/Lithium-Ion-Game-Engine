@@ -461,12 +461,3 @@ int main()
 	return returnCode;
 }
 
-#include "GLPlatform.hpp"
-
-// REMOVE LATER
-void Game::draw()
-{
-	glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
-	glViewport(0, 0, _windowWidth, _windowHeight); // Set the viewport size to fill the window
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); // Clear required buffers
-}
