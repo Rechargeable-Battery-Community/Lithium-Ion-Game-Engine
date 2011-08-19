@@ -26,7 +26,7 @@
 #ifndef LITHIUM_BUTTONS_HPP_INCLUDED
 #define LITHIUM_BUTTONS_HPP_INCLUDED
 
-#include <rtl/flag_set.hpp>
+#include <rtl/flags.hpp>
 
 namespace Lithium
 {
@@ -86,7 +86,7 @@ namespace Lithium
 			//----------------------------------------------------------------------
 
 			/// A button
-			A = 12,
+			A = 11,
 			/// B button
 			B,
 			/// X button
@@ -128,7 +128,7 @@ namespace Lithium
 			/// Unused
 			std::uint32_t UnusedFlag1:1;
 			/// Unused
-			std::uint32_t UnusedFlag2:2;
+			std::uint32_t UnusedFlag2:1;
 			/// A flag
 			std::uint32_t AFlag:1;
 			/// B flag

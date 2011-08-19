@@ -1,5 +1,5 @@
 /**
- * \file Includes.hpp
+ * \file RasterizerState.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,28 +23,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_SYSTEM_INCLUDES_HPP
-#define LITHIUM_SYSTEM_INCLUDES_HPP
+#include <Lithium/Graphics/RasterizerState.hpp>
+using namespace Lithium;
 
-//----------------------------------------------------------------------
-// STL includes
-//----------------------------------------------------------------------
+LITHIUM_IMPLEMENT_TYPE_INFO(Lithium, RasterizerState, GraphicsResource);
 
-#include <cstdint>
-#include <string>
-#include <map>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <fstream>
+//---------------------------------------------------------------------
 
-#include <Lithium/System/Debug.hpp>
+RasterizerState::RasterizerState()
+{ }
 
-//----------------------------------------------------------------------
-// RTL includes
-//----------------------------------------------------------------------
+//---------------------------------------------------------------------
 
-#include <rtl/flags.hpp>
-#include <rtl/reflection.hpp>
-
-#endif // end LITHIUM_SYSTEM_INCLUDES_HPP
+RasterizerState::~RasterizerState()
+{ }

@@ -1,5 +1,5 @@
 /**
- * \file Includes.hpp
+ * \file BlendState.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,28 +23,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_SYSTEM_INCLUDES_HPP
-#define LITHIUM_SYSTEM_INCLUDES_HPP
+#ifndef LITHIUM_FILL_MODE_HPP_INCLUDED
+#define LITHIUM_FILL_MODE_HPP_INCLUDED
 
-//----------------------------------------------------------------------
-// STL includes
-//----------------------------------------------------------------------
+namespace Lithium
+{
+	namespace FillMode
+	{
+		/// An enumerated type
+		enum Enum
+		{
+			/// Draw solid faces for each primitive
+			Solid,
+			/// Draw lines connecting the vertices that define a primitive face
+			Wireframe,
+			/// The number of enumerations
+			Size
 
-#include <cstdint>
-#include <string>
-#include <map>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <fstream>
+		} ; // end enum Enum
 
-#include <Lithium/System/Debug.hpp>
+	} // end namespace FillMode
 
-//----------------------------------------------------------------------
-// RTL includes
-//----------------------------------------------------------------------
+} // end namespace Lithium
 
-#include <rtl/flags.hpp>
-#include <rtl/reflection.hpp>
-
-#endif // end LITHIUM_SYSTEM_INCLUDES_HPP
+#endif // end LITHIUM_FILL_MODE_HPP_INCLUDED

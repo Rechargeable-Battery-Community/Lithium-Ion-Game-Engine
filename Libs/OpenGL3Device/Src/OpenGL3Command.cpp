@@ -1,5 +1,5 @@
 /**
- * \file Includes.hpp
+ * \file OpenGL3Command.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,28 +23,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_SYSTEM_INCLUDES_HPP
-#define LITHIUM_SYSTEM_INCLUDES_HPP
+#include "OpenGL3Command.hpp"
+#include "GLPlatform.hpp"
+using namespace Lithium;
 
-//----------------------------------------------------------------------
-// STL includes
-//----------------------------------------------------------------------
+namespace
+{
+	void setBlendState(const BlendStateBinding* binding)
+	{
+		glBlendEquationSeparate(
+			binding->colorFunction,
+			binding->alphaFunction
+		);
 
-#include <cstdint>
-#include <string>
-#include <map>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <fstream>
+		glBlendFuncSeparate(
+			binding->colorSource,
+			binding->colorDestination,
+			binding->alphaSource,
+			binding->alphaDestination
+		) ;
+	}
 
-#include <Lithium/System/Debug.hpp>
+} // end anonymous namespace
 
-//----------------------------------------------------------------------
-// RTL includes
-//----------------------------------------------------------------------
+//---------------------------------------------------------------------
 
-#include <rtl/flags.hpp>
-#include <rtl/reflection.hpp>
-
-#endif // end LITHIUM_SYSTEM_INCLUDES_HPP
+void Lithium::executeCommand(const GraphicsCommand& command)
+{
+	setBlendState(command.blendState);
+}

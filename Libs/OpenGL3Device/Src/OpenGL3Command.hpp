@@ -1,5 +1,5 @@
 /**
- * \file RasterizerState.hpp
+ * \file OpenGL3Command.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,35 +23,37 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_RASTERIZER_STATE_HPP_INCLUDED
-#define LITHIUM_RASTERIZER_STATE_HPP_INCLUDED
+#ifndef LITHIUM_OPNEGL3_COMMAND_HPP_INCLUDED
+#define LITHIUM_OPENGL3_COMMAND_HPP_INCLUDED
 
-#include <Lithium/Graphics/GraphicsResource.hpp>
+#include "BlendStateBinding.hpp"
 
 namespace Lithium
 {
-	class RasterizerState : public GraphicsResource
+	/**
+	 * Contains the infomation to execute a draw call.
+	 *
+	 * \todo Make this a dynamic structure to reduce state changes. Refactor
+	 * into something more robust. Currently just using the bindings to make calls.
+	 *
+	 * \author Don Olmstead
+	 * \version 0.1
+	 */
+	struct GraphicsCommand
 	{
-		LITHIUM_DECLARE_TYPE_INFO;
-
 		//----------------------------------------------------------------------
-		// Construction/Destruction
+		// Render State
 		//----------------------------------------------------------------------
 
-		public:
+		/// The BlendState to use
+		const BlendStateBinding* blendState;
+	} ;
 
-			/**
-			 * Creates an instance of the RasterizerState class.
-			 */
-			RasterizerState();
-
-			/**
-			 * Destroys an instance of the RasterizerState class.
-			 */
-			virtual ~RasterizerState();
-
-	} ; // end class RasterizerState
+	/**
+	 * Executes the GraphicsCommand.
+	 */
+	void executeCommand(const GraphicsCommand& command);
 
 } // end namespace Lithium
 
-#endif // end LITHIUM_RASTERIZER_STATE_HPP_INCLUDED
+#endif // end LITHIUM_OPENGL_COMMAND_HPP_INCLUDED

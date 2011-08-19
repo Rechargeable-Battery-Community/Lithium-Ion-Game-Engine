@@ -26,14 +26,15 @@
 #ifndef LITHIUM_GRAPHICS_DEVICE_HPP_INCLUDED
 #define LITHIUM_GRAPHICS_DEVICE_HPP_INCLUDED
 
+#include <Lithium/Graphics/BlendState.hpp>
+#include <Lithium/Graphics/DepthStencilState.hpp>
+#include <Lithium/Graphics/RasterizerState.hpp>
 #include <Lithium/Graphics/EffectPass.hpp>
 #include <Lithium/Graphics/Viewport.hpp>
+#include <Lithium/Graphics/GraphicsDeviceContext.hpp>
 
 namespace Lithium
 {
-	struct VertexShaderBinding;
-	struct PixelShaderBinding;
-	struct GeometryShaderBinding;
 
 	class GraphicsDevice
 	{
@@ -43,6 +44,11 @@ namespace Lithium
 			 * Creates an instance of the GraphicsDevice class.
 			 */
 			GraphicsDevice();
+
+			/**
+			 * Destroys an instance of the GraphicsDevice class.
+			 */
+			~GraphicsDevice();
 
 		public:
 
@@ -57,7 +63,66 @@ namespace Lithium
 
 			void setViewport(const Viewport& viewport);
 
+			void bind(GraphicsResource* resource);
+
+			void release(GraphicsResource* resource);
+
+			inline GraphicsDeviceContext* getContext() const
+			{
+				return _immediateContext;
+			}
+
+			void execute(const GraphicsDeviceContext* context);
+
 		//private:
+
+		//----------------------------------------------------------------------
+		// Render state methods
+		//----------------------------------------------------------------------
+
+		private:
+
+			/**
+			 * Binds a BlendState to the renderer.
+			 *
+			 * \param state The BlendState to bind.
+			 */
+			void bindBlendState(BlendState* state);
+
+			/**
+			 * Releases a BlendState from the renderer.
+			 *
+			 * \param state The BlendState to release.
+			 */
+			void releaseBlendState(BlendState* state);
+
+			/**
+			 * Binds a DepthStencilState to the renderer.
+			 *
+			 * \param state The DepthStencilState to bind.
+			 */
+			void bindDepthStencilState(DepthStencilState* state);
+
+			/**
+			 * Releases a DepthStencilState from the renderer.
+			 *
+			 * \param state The DepthStencilState to release.
+			 */
+			void releaseDepthStencilState(DepthStencilState* state);
+
+			/**
+			 * Binds a RasterizerState to the renderer.
+			 *
+			 * \param state The RasterizerState to bind.
+			 */
+			void bindRasterizerState(RasterizerState* state);
+
+			/**
+			 * Releases a RasterizerState from the renderer.
+			 *
+			 * \param state The RasterizerState to release.
+			 */
+			void releaseRasterizerState(RasterizerState* state);
 
 			void createVertexShader(VertexShader* shader);
 			void createPixelShader(PixelShader* shader);
@@ -71,6 +136,15 @@ namespace Lithium
 			void destroyEffectPass(EffectPass* effect);
 
 			Viewport _viewport;
+
+		//----------------------------------------------------------------------
+		// Member variables
+		//----------------------------------------------------------------------
+
+		private:
+
+			/// The GraphicsDeviceContext associated with the device
+			GraphicsDeviceContext* _immediateContext;
 
 	} ; // end class GraphicsDevice
 

@@ -1,5 +1,5 @@
 /**
- * \file GraphicsResource.cpp
+ * \file OpenGL3DeviceContext.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,36 +23,59 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Lithium/Graphics/GraphicsResource.hpp>
-#include <Lithium/Graphics/GraphicsDevice.hpp>
+#include <Lithium/Graphics/GraphicsDeviceContext.hpp>
+#include "OpenGL3CommandList.hpp"
 using namespace Lithium;
 
-LITHIUM_IMPLEMENT_TYPE_INFO(Lithium, GraphicsResource, Object);
-
 //---------------------------------------------------------------------
 
-GraphicsResource::GraphicsResource()
-: _device(0)
-, _binding(0)
+GraphicsDeviceContext::GraphicsDeviceContext(const GraphicsDevice* device)
+: _commandList(new GraphicsCommandList())
+, _device(device)
+, _blendState(0)
 { }
 
 //---------------------------------------------------------------------
 
-GraphicsResource::~GraphicsResource()
-{ }
-
-//---------------------------------------------------------------------
-
-void GraphicsResource::setDevice(GraphicsDevice* device, void* binding)
+GraphicsDeviceContext::~GraphicsDeviceContext()
 {
-	_device = device;
-	_binding = binding;
+	if (_commandList)
+	{
+		delete _commandList;
+		_commandList = 0;
+	}
 }
 
 //---------------------------------------------------------------------
 
-void GraphicsResource::release()
+void GraphicsDeviceContext::begin()
 {
-	if (_device)
-		_device->release(this);
+	_commandList->begin();
+}
+
+//---------------------------------------------------------------------
+
+void GraphicsDeviceContext::draw()
+{
+	_commandList->draw();
+}
+
+//---------------------------------------------------------------------
+
+void GraphicsDeviceContext::end()
+{
+	_commandList->end();
+}
+
+//---------------------------------------------------------------------
+
+void GraphicsDeviceContext::setBlendState(const BlendState* state)
+{
+	_blendState = state;
+
+	const BlendStateBinding* binding = (const BlendStateBinding*)state->getResources();
+	LITHIUM_ASSERT(binding, "Resource has not been bound");
+	LITHIUM_ASSERT(state->getDevice() == _device, "Resource is not bound to this device");
+
+	_commandList->setBlendStateBinding(binding);
 }

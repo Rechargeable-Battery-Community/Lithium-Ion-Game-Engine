@@ -28,6 +28,13 @@
 using namespace Lithium;
 
 //----------------------------------------------------------------------
+// Blending functions
+//----------------------------------------------------------------------
+
+PFNGLBLENDEQUATIONSEPARATEPROC glBlendEquationSeparate = NULL;
+PFNGLBLENDFUNCSEPARATEPROC glBlendFuncSeparate = NULL;
+
+//----------------------------------------------------------------------
 // Buffer functions
 //----------------------------------------------------------------------
 
@@ -85,6 +92,13 @@ PFNGLGETACTIVEUNIFORMPROC glGetActiveUniform = NULL;
 
 void GraphicsAPI::initialize()
 {
+	//----------------------------------------------------------------------
+	// Initialize Blending functions
+	//----------------------------------------------------------------------
+
+	glBlendEquationSeparate = (PFNGLBLENDEQUATIONSEPARATEPROC)wglGetProcAddress("glBlendEquationSeparate");
+	glBlendFuncSeparate = (PFNGLBLENDFUNCSEPARATEPROC)wglGetProcAddress("glBlendFuncSeparate");
+
 	//----------------------------------------------------------------------
 	// Initialize Buffer functions
 	//----------------------------------------------------------------------

@@ -1,5 +1,5 @@
 /**
- * \file OpenGL3Device.cpp
+ * \file OpenGL3CommandList.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,47 +23,49 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Lithium/Graphics/GraphicsDevice.hpp>
-#include "GLPlatform.hpp"
 #include "OpenGL3CommandList.hpp"
 using namespace Lithium;
 
 //---------------------------------------------------------------------
 
-void GraphicsDevice::clear()
+GraphicsCommandList::GraphicsCommandList()
+: _finished(true)
+, _currentCommand(0)
+{ }
+
+//---------------------------------------------------------------------
+
+void GraphicsCommandList::begin()
 {
-	glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); // Clear required buffers
+	LITHIUM_ASSERT(_finished, "Command building has not finished");
+
+	_finished = false;
+	_currentCommand = 0;
 }
 
 //---------------------------------------------------------------------
 
-void GraphicsDevice::setViewport(const Viewport& viewport)
+void GraphicsCommandList::draw()
 {
-	_viewport = viewport;
+	LITHIUM_ASSERT(!_finished, "Command building has not started");
 
-	// Set the viewport
-	const std::int32_t x = _viewport.getX();
-	const std::int32_t y = _viewport.getY();
-	const std::int32_t width = _viewport.getWidth();
-	const std::int32_t height = _viewport.getHeight();
-
-	glViewport(x, y, width, height);
-	glScissor(x, y, width, height);
-
-	// Set the depth
-	glDepthRange(_viewport.getMinDepth(), _viewport.getMaxDepth());
+	++_currentCommand;
 }
 
 //---------------------------------------------------------------------
 
-void GraphicsDevice::execute(const GraphicsDeviceContext* context)
+void GraphicsCommandList::end()
 {
-	const GraphicsCommandList* commands = context->getCommandList();
-	LITHIUM_ASSERT(commands->isFinished(), "Command generation has not completed");
+	LITHIUM_ASSERT(!_finished, "Command building has not started");
 
-	const std::int32_t count = commands->getCommandCount();
+	_finished = true;
+}
 
-	for (std::int32_t i = 0; i < count; ++i)
-		executeCommand((*commands)[i]);
+//---------------------------------------------------------------------
+
+void GraphicsCommandList::setBlendStateBinding(const BlendStateBinding* binding)
+{
+	LITHIUM_ASSERT(!_finished, "Command building has not started");
+
+	_commands[_currentCommand].blendState = binding;
 }

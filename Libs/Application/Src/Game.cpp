@@ -35,6 +35,7 @@
 #include <Lithium/Input/GamePad.hpp>
 
 #include <Lithium/Graphics/EffectPass.hpp>
+#include "GLPlatform.hpp"
 using namespace Lithium;
 
 Game* Game::instance = 0;
@@ -45,6 +46,8 @@ HttpServer* __server;
 EffectPass* __effectPass;
 VertexShader* __vertexShader;
 PixelShader* __pixelShader;
+
+BlendState* __blendState;
 
 //---------------------------------------------------------------------
 
@@ -75,6 +78,8 @@ void Game::initialize()
 	Viewport viewport(0, 0, _gameWindow->getWidth(), _gameWindow->getHeight());
 	_graphicsDevice->setViewport(viewport);
 
+	__blendState = new BlendState();
+	_graphicsDevice->bind(__blendState);
 	/*
 	__vertexShader = new VertexShader();
 	__pixelShader = new PixelShader();
@@ -97,7 +102,7 @@ void Game::initialize()
 
 void Game::terminate()
 {
-
+	delete __blendState;
 }
 
 //---------------------------------------------------------------------
@@ -116,4 +121,29 @@ void Game::update()
 void Game::draw()
 {
 	_graphicsDevice->clear();
+
+	GraphicsDeviceContext* context = _graphicsDevice->getContext();
+	context->begin();
+	context->setBlendState(__blendState);
+	context->draw();
+	context->end();
+	_graphicsDevice->execute(context);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glFrustum(-8.0, 8.0, -6.0, 6.0, 0.0, 100.0);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glTranslatef(0.0f, 0.0f, 1.0f);
+	glBegin(GL_QUADS);
+		glVertex3f( 0.5f,  0.5f, 0.0f);
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glVertex3f(-0.5f,  0.5f, 0.0f);
+		glColor3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(-1.0f, -0.5f, 0.0f);
+		glColor3f(0.0f, 0.0f, 1.0f);
+		glVertex3f( 1.0f, -0.5f, 0.0f);
+		glColor3f(1.0f, 1.0f, 0.0f);
+	glEnd();
 }

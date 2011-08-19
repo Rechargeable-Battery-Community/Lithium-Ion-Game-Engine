@@ -1,5 +1,5 @@
 /**
- * \file Includes.hpp
+ * \file CullMode.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,28 +23,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_SYSTEM_INCLUDES_HPP
-#define LITHIUM_SYSTEM_INCLUDES_HPP
+#ifndef LITHIUM_CULL_MODE_HPP_INCLUDED
+#define LITHIUM_CULL_MODE_HPP_INCLUDED
 
-//----------------------------------------------------------------------
-// STL includes
-//----------------------------------------------------------------------
+namespace Lithium
+{
+	namespace CullMode
+	{
+		/// An enumerated type
+		enum Enum
+		{
+			/// Cull back faces with clockwise vertices
+			CullClockwiseFace,
+			/// Cull back faces with counterclockwise vertices
+			CullCounterClockwiseFace,
+			/// Do not cull back faces
+			None,
+			/// The number of enumerations
+			Size
 
-#include <cstdint>
-#include <string>
-#include <map>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <fstream>
+		} ; // end enum Enum
 
-#include <Lithium/System/Debug.hpp>
+	} // end namespace CullMode
 
-//----------------------------------------------------------------------
-// RTL includes
-//----------------------------------------------------------------------
+} // end namespace Lithium
 
-#include <rtl/flags.hpp>
-#include <rtl/reflection.hpp>
-
-#endif // end LITHIUM_SYSTEM_INCLUDES_HPP
+#endif // end LITHIUM_CULL_MODE_HPP_INCLUDED

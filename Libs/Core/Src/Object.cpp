@@ -1,5 +1,5 @@
 /**
- * \file Includes.hpp
+ * \file Object.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,28 +23,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_SYSTEM_INCLUDES_HPP
-#define LITHIUM_SYSTEM_INCLUDES_HPP
+#include "LithiumCorePCH.hpp"
+#include <Lithium/System/Object.hpp>
+using namespace Lithium;
 
-//----------------------------------------------------------------------
-// STL includes
-//----------------------------------------------------------------------
+rtl::class_info Object::__classInfo("Lithium.Object", 0);
 
-#include <cstdint>
-#include <string>
-#include <map>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <fstream>
+//---------------------------------------------------------------------
 
-#include <Lithium/System/Debug.hpp>
+Object::Object()
+{ }
 
-//----------------------------------------------------------------------
-// RTL includes
-//----------------------------------------------------------------------
+//---------------------------------------------------------------------
 
-#include <rtl/flags.hpp>
-#include <rtl/reflection.hpp>
-
-#endif // end LITHIUM_SYSTEM_INCLUDES_HPP
+Object::~Object()
+{ }

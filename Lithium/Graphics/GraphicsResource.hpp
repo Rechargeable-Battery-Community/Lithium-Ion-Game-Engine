@@ -26,14 +26,21 @@
 #ifndef LITHIUM_GRAPHICS_RESOURCE_HPP_INCLUDED
 #define LITHIUM_GRAPHICS_RESOURCE_HPP_INCLUDED
 
-#include <Lithium/System/Includes.hpp>
+#include <Lithium/System/Object.hpp>
 
 namespace Lithium
 {
-	class GraphicsDevice;
+	//----------------------------------------------------------------------
+	// Forward declarations
+	//----------------------------------------------------------------------
 
-	class GraphicsResource
+	class GraphicsDevice;
+	class GraphicsDeviceContext;
+
+	class GraphicsResource : public Object
 	{
+		LITHIUM_DECLARE_TYPE_INFO;
+
 		protected:
 
 			/**
@@ -60,11 +67,34 @@ namespace Lithium
 				return _device;
 			}
 
+		protected:
+
+			/**
+			 * Remove the device binding.
+			 *
+			 * Makes a call into the graphics device to remove any
+			 * allocated resources.
+			 */
+			void release();
+
 		private:
 
-			void setDevice(GraphicsDevice* device, void* binding);
+			/**
+			 * Creates the device binding.
+			 *
+			 * This call is made by the GraphicsDevice during binding.
+			 *
+			 * \param device The graphics device to bind to.
+			 * \param resources The graphics resources.
+			 */
+			void setDevice(GraphicsDevice* device, void* resources);
 
-			inline void* getBinding() const
+			/**
+			 * Gets the resources bound to the device.
+			 *
+			 * \returns The resources bound to the device.
+			 */
+			inline void* getResources() const
 			{
 				return _binding;
 			}
@@ -72,8 +102,11 @@ namespace Lithium
 		private:
 
 			friend class GraphicsDevice;
+			friend class GraphicsDeviceContext;
 
+			/// The associated graphics device.
 			GraphicsDevice* _device;
+			/// The resources bound to the device.
 			void* _binding;
 
 	} ; // end class GraphicsResource

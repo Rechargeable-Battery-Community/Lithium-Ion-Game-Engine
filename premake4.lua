@@ -3,8 +3,8 @@ solution "Lithium"
 	includedirs
 	{
 		"./",
-		"C:/Users/Don/Documents/Visual Studio 2008/Projects/basis_branch_01",
-		"C:/Users/Don/Documents/Visual Studio 2010/Projects/RechargeableTemplate",
+		"$(BASISPATH)",
+		"$(RTLPATH)",
 		"Libs/Common/Src"
 	}
 	
@@ -12,11 +12,19 @@ solution "Lithium"
 		targetdir "SDK/Debug"
 		defines { "DEBUG" }
 		flags { "Symbols" }
+		libdirs
+		{
+			"$(RTLPATH)/build/debug"
+		}
 
 	configuration "Release"
 		targetdir "SDK/Release"
 		defines { "NDEBUG" }
 		flags { "Optimize" }
+		libdirs
+		{
+			"$(RTLPATH)/build/release"
+		}	
 
 	-- Core project
 	project "Lithium.Core"
@@ -145,6 +153,7 @@ solution "Lithium"
 			"XInput",
 			"wsock32",
 			"ws2_32",
+			"rtl.reflection",
 			"Lithium.Core",
 			"Lithium.Graphics",
 			"Lithium.Network",

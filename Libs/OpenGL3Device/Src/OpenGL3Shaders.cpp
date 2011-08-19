@@ -105,7 +105,7 @@ void GraphicsDevice::createGeometryShader(GeometryShader* shader)
 void GraphicsDevice::destroyVertexShader(VertexShader* shader)
 {
 	// Get the binding
-	VertexShaderBinding* binding = static_cast<VertexShaderBinding*>(shader->getBinding());
+	VertexShaderBinding* binding = static_cast<VertexShaderBinding*>(shader->getResources());
 
 	// Delete the shader from OpenGL
 	glDeleteShader(binding->id);
@@ -119,7 +119,7 @@ void GraphicsDevice::destroyVertexShader(VertexShader* shader)
 void GraphicsDevice::destroyPixelShader(PixelShader* shader)
 {
 	// Get the binding
-	PixelShaderBinding* binding = static_cast<PixelShaderBinding*>(shader->getBinding());
+	PixelShaderBinding* binding = static_cast<PixelShaderBinding*>(shader->getResources());
 
 	// Delete the shader from OpenGL
 	glDeleteShader(binding->id);
@@ -133,7 +133,7 @@ void GraphicsDevice::destroyPixelShader(PixelShader* shader)
 void GraphicsDevice::destroyGeometryShader(GeometryShader* shader)
 {
 	// Get the binding
-	GeometryShaderBinding* binding = static_cast<GeometryShaderBinding*>(shader->getBinding());
+	GeometryShaderBinding* binding = static_cast<GeometryShaderBinding*>(shader->getResources());
 
 	// Delete the shader from OpenGL
 	glDeleteShader(binding->id);

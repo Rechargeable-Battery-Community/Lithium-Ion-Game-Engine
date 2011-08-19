@@ -97,7 +97,7 @@ namespace Lithium
 			}
 
 			/**
-			 * Gets the current display orientation.
+			 * Retrieves the current display orientation.
 			 *
 			 * Reflects the physical orientation of the device in the user's hand.
 			 *

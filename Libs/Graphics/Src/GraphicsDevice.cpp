@@ -1,5 +1,5 @@
 /**
- * \file GraphicsResource.cpp
+ * \file GraphicsDevice.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,36 +23,48 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Lithium/Graphics/GraphicsResource.hpp>
 #include <Lithium/Graphics/GraphicsDevice.hpp>
 using namespace Lithium;
 
-LITHIUM_IMPLEMENT_TYPE_INFO(Lithium, GraphicsResource, Object);
-
 //---------------------------------------------------------------------
 
-GraphicsResource::GraphicsResource()
-: _device(0)
-, _binding(0)
-{ }
-
-//---------------------------------------------------------------------
-
-GraphicsResource::~GraphicsResource()
-{ }
-
-//---------------------------------------------------------------------
-
-void GraphicsResource::setDevice(GraphicsDevice* device, void* binding)
+GraphicsDevice::GraphicsDevice()
+: _viewport(0, 0, 0, 0)
 {
-	_device = device;
-	_binding = binding;
+	_immediateContext = new GraphicsDeviceContext(this);
 }
 
 //---------------------------------------------------------------------
 
-void GraphicsResource::release()
+GraphicsDevice::~GraphicsDevice()
 {
-	if (_device)
-		_device->release(this);
+	if (_immediateContext)
+	{
+		delete _immediateContext;
+		_immediateContext = 0;
+	}
+}
+
+//---------------------------------------------------------------------
+
+void GraphicsDevice::bind(GraphicsResource* resource)
+{
+	if (resource->isExactly(BlendState::typeOf()))
+		bindBlendState(static_cast<BlendState*>(resource));
+	else if (resource->isExactly(DepthStencilState::typeOf()))
+		bindDepthStencilState(static_cast<DepthStencilState*>(resource));
+	else if (resource->isExactly(RasterizerState::typeOf()))
+		bindRasterizerState(static_cast<RasterizerState*>(resource));
+}
+
+//---------------------------------------------------------------------
+
+void GraphicsDevice::release(GraphicsResource* resource)
+{
+	if (resource->isExactly(BlendState::typeOf()))
+		releaseBlendState(static_cast<BlendState*>(resource));
+	else if (resource->isExactly(DepthStencilState::typeOf()))
+		releaseDepthStencilState(static_cast<DepthStencilState*>(resource));
+	else if (resource->isExactly(RasterizerState::typeOf()))
+		releaseRasterizerState(static_cast<RasterizerState*>(resource));
 }

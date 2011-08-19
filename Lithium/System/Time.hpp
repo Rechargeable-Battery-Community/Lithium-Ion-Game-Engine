@@ -26,6 +26,7 @@
 #ifndef LITHIUM_TIME_HPP_INCLUDED
 #define LITHIUM_TIME_HPP_INCLUDED
 
+#include <Lithium/LithiumCoreLIB.hpp>
 #include <Lithium/System/Includes.hpp>
 
 namespace Lithium

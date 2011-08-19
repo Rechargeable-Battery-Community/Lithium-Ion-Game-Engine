@@ -29,6 +29,13 @@ extern "C" {
 #endif
 
 //----------------------------------------------------------------------
+// Blending functions
+//----------------------------------------------------------------------
+
+extern PFNGLBLENDEQUATIONSEPARATEPROC glBlendEquationSeparate;
+extern PFNGLBLENDFUNCSEPARATEPROC glBlendFuncSeparate;
+
+//----------------------------------------------------------------------
 // Shader functions
 //----------------------------------------------------------------------
 

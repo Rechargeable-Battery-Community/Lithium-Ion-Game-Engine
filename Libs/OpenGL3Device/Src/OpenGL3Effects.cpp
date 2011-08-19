@@ -42,7 +42,7 @@ void GraphicsDevice::createEffectPass(EffectPass* effect)
 
 	if (vertexShader)
 	{
-		const VertexShaderBinding* vertexBinding = static_cast<VertexShaderBinding*>(vertexShader->getBinding());
+		const VertexShaderBinding* vertexBinding = static_cast<VertexShaderBinding*>(vertexShader->getResources());
 
 		glAttachShader(program, vertexBinding->id);
 	}
@@ -52,7 +52,7 @@ void GraphicsDevice::createEffectPass(EffectPass* effect)
 
 	if (pixelShader)
 	{
-		const PixelShaderBinding* pixelBinding = static_cast<PixelShaderBinding*>(pixelShader->getBinding());
+		const PixelShaderBinding* pixelBinding = static_cast<PixelShaderBinding*>(pixelShader->getResources());
 
 		glAttachShader(program, pixelBinding->id);
 	}
@@ -62,7 +62,7 @@ void GraphicsDevice::createEffectPass(EffectPass* effect)
 
 	if (geometryShader)
 	{
-		const GeometryShaderBinding* geometryBinding = static_cast<GeometryShaderBinding*>(geometryShader->getBinding());
+		const GeometryShaderBinding* geometryBinding = static_cast<GeometryShaderBinding*>(geometryShader->getResources());
 
 		glAttachShader(program, geometryBinding->id);
 	}
@@ -83,7 +83,7 @@ void GraphicsDevice::createEffectPass(EffectPass* effect)
 void GraphicsDevice::setEffectPass(EffectPass* effect)
 {
 	// Get the binding
-	EffectPassBinding* binding = static_cast<EffectPassBinding*>(effect->getBinding());
+	EffectPassBinding* binding = static_cast<EffectPassBinding*>(effect->getResources());
 
 	// Use the program
 	glUseProgram(binding->id);
@@ -94,7 +94,7 @@ void GraphicsDevice::setEffectPass(EffectPass* effect)
 void GraphicsDevice::destroyEffectPass(EffectPass* effect)
 {
 	// Get the binding
-	EffectPassBinding* binding = static_cast<EffectPassBinding*>(effect->getBinding());
+	EffectPassBinding* binding = static_cast<EffectPassBinding*>(effect->getResources());
 
 	// Delete the program object from OpenGL
 	glDeleteProgram(binding->id);

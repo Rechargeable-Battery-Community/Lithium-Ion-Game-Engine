@@ -26,4 +26,18 @@
 #ifndef LITHIUM_GRAPHICS_LIB_HPP_INCLUDED
 #define LITHIUM_GRAPHICS_LIB_HPP_INCLUDED
 
+// For the DLL library
+#if defined(LITHIUM_GRAPHICS_DLL_EXPORT)
+#define LITHIUM_GRAPHICS_ITEM __declspec(dllexport)
+
+// For a client of the DLL library
+#elif defined(LITHIUM_GRAPHICS_DLL_IMPORT)
+#define LITHIUM_GRAPHICS_ITEM __declspec(dllimport)
+
+// For the state library
+#else
+#define LITHIUM_GRAPHICS_ITEM
+
+#endif
+
 #endif // end LITHIUM_GRAPHICS_LIB_HPP_INCLUDED

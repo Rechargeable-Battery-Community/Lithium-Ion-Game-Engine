@@ -36,7 +36,7 @@ float Time::_smoothedDeltaTime = 0.0f;
 void Time::update()
 {
 	// Get the current time
-	float current = getCurrentTime();
+	const float current = getCurrentTime();
 
 	// Compute the delta time
 	_deltaTime = current - _totalTime;

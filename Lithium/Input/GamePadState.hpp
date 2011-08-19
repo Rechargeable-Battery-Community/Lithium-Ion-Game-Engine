@@ -152,11 +152,16 @@ namespace Lithium
 				return _buttonFlags.is_set(button);
 			}
 
+			inline std::uint16_t getButtonFlags() const
+			{
+				return _buttonFlags;
+			}
+
 		private:
 
 			inline void setButtonFlags(std::uint16_t flags)
 			{
-				_buttonFlags.container()._bit_array = flags;
+				_buttonFlags.set_values(flags);
 			}
 
 		//----------------------------------------------------------------------

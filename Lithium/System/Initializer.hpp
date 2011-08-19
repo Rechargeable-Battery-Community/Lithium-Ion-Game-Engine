@@ -26,6 +26,7 @@
 #ifndef LITHIUM_INITIALIZER_HPP_INCLUDED
 #define LITHIUM_INITIALIZER_HPP_INCLUDED
 
+#include <Lithium/LithiumCoreLIB.hpp>
 #include <Lithium/System/Includes.hpp>
 
 namespace Lithium
@@ -34,9 +35,17 @@ namespace Lithium
 	{
 		typedef void (*InitFunction)();
 
-		void addInitializer(InitFunction init);
+		/**
+		 * Adds an initialization function to execute.
+		 *
+		 * \param init The initialization function to execute.
+		 */
+		LITHIUM_CORE_ITEM void addInitializer(InitFunction init);
 
-		void execute();
+		/**
+		 * Executes the initialization functions.
+		 */
+		LITHIUM_CORE_ITEM void execute();
 
 	} // end namespace Initializer
 

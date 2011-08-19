@@ -133,5 +133,8 @@ void GameWindow::setTitle(const std::string& title)
 {
 	_title = title;
 
+	HWND handle = (HWND)IntToPtr(_handle);
+
 	// Update the window title
+	SetWindowText(handle, title.c_str());
 }

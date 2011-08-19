@@ -225,7 +225,7 @@ void HttpServer::getGamePad(HttpRequest& request, TcpSocket& connection, const s
 			Json::Value root;
 
 			root["isConnected"] = gamePad.isConnected();
-			root["buttons"] = 7;
+			root["buttons"] = gamePad.getButtonFlags();
 			root["leftTrigger"] = gamePad.getLeftTrigger();
 			root["rightTrigger"] = gamePad.getRightTrigger();
 
