@@ -31,12 +31,7 @@ LITHIUM_IMPLEMENT_TYPE_INFO(Lithium, BlendState, GraphicsResource);
 //---------------------------------------------------------------------
 
 BlendState::BlendState()
-: _alphaBlendFunction(BlendFunction::Add)
-, _colorBlendFunction(BlendFunction::Add)
-, _alphaDestinationBlend(Blend::One)
-, _alphaSourceBlend(Blend::One)
-, _colorDestinationBlend(Blend::One)
-, _colorSourceBlend(Blend::One)
+: _numTargets(1)
 { }
 
 //---------------------------------------------------------------------
@@ -48,54 +43,72 @@ BlendState::~BlendState()
 
 //---------------------------------------------------------------------
 
-void BlendState::setAlphaBlendFunction(BlendFunction::Enum function)
+void BlendState::setAlphaBlendFunction(BlendFunction::Enum function, std::size_t i)
 {
 	// \todo Handle case where already bound
+		
+	_renderTargetBlendStates[i].alphaBlendFunction = function;
 
-	_alphaBlendFunction = function;
+	// Update the number of render targets in use
+	updateTargetCount(i);
 }
 
 //---------------------------------------------------------------------
 
-void BlendState::setAlphaDestinationBlend(Blend::Enum blend)
+void BlendState::setAlphaDestinationBlend(Blend::Enum blend, std::size_t i)
 {
 	// \todo Handle case where already bound
 
-	_alphaDestinationBlend = blend;
+	_renderTargetBlendStates[i].alphaDestinationBlend = blend;
+
+	// Update the number of render targets in use
+	updateTargetCount(i);
 }
 
 //---------------------------------------------------------------------
 
-void BlendState::setAlphaSourceBlend(Blend::Enum blend)
+void BlendState::setAlphaSourceBlend(Blend::Enum blend, std::size_t i)
 {
 	// \todo Handle case where already bound
 
-	_alphaSourceBlend = blend;
+	_renderTargetBlendStates[i].alphaSourceBlend = blend;
+
+	// Update the number of render targets in use
+	updateTargetCount(i);
 }
 
 //---------------------------------------------------------------------
 
-void BlendState::setColorBlendFunction(BlendFunction::Enum function)
+void BlendState::setColorBlendFunction(BlendFunction::Enum function, std::size_t i)
 {
 	// \todo Handle case where already bound
 
-	_colorBlendFunction = function;
+	_renderTargetBlendStates[i].colorBlendFunction = function;
+
+	// Update the number of render targets in use
+	updateTargetCount(i);
 }
 
 //---------------------------------------------------------------------
 
-void BlendState::setColorDestinationBlend(Blend::Enum blend)
+void BlendState::setColorDestinationBlend(Blend::Enum blend, std::size_t i)
 {
 	// \todo Handle case where already bound
 
-	_colorDestinationBlend = blend;
+	_renderTargetBlendStates[i].colorDestinationBlend = blend;
+
+	// Update the number of render targets in use
+	updateTargetCount(i);
 }
 
 //---------------------------------------------------------------------
 
-void BlendState::setColorSourceBlend(Blend::Enum blend)
+void BlendState::setColorSourceBlend(Blend::Enum blend, std::size_t i)
 {
 	// \todo Handle case where already bound
 
-	_colorSourceBlend = blend;
+	_renderTargetBlendStates[i].colorSourceBlend = blend;
+
+	// Update the number of render targets in use
+	updateTargetCount(i);
 }

@@ -31,12 +31,24 @@
 //----------------------------------------------------------------------
 
 #include <cstdint>
+#include <cstddef>
+
 #include <string>
 #include <map>
 #include <vector>
 #include <sstream>
-#include <regex>
 #include <fstream>
+
+//----------------------------------------------------------------------
+// TR1 includes
+//----------------------------------------------------------------------
+
+#include <regex>
+#include <array>
+
+//----------------------------------------------------------------------
+// Debug macro
+//----------------------------------------------------------------------
 
 #include <Lithium/System/Debug.hpp>
 
@@ -46,5 +58,21 @@
 
 #include <rtl/flags.hpp>
 #include <rtl/reflection.hpp>
+
+//----------------------------------------------------------------------
+// Min/Max
+//----------------------------------------------------------------------
+
+template <typename T>
+inline T min(const T& a, const T& b)
+{
+	return (a < b) ? a : b;
+}
+
+template <typename T>
+inline T max(const T& a, const T& b)
+{
+	return (a > b) ? a : b;
+}
 
 #endif // end LITHIUM_SYSTEM_INCLUDES_HPP

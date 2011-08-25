@@ -1,5 +1,5 @@
 /**
- * \file RasterizerState.cpp
+ * \file DepthStencilStateBinding.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,24 +23,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Lithium/Graphics/RasterizerState.hpp>
-using namespace Lithium;
+#ifndef LITHIUM_DEPTH_STENCIL_STATE_BINDING_HPP_INCLUDED
+#define LITHIUM_DEPTH_STENCIL_STATE_BINDING_HPP_INCLUDED
 
-LITHIUM_IMPLEMENT_TYPE_INFO(Lithium, RasterizerState, GraphicsResource);
+#include "GLPlatform.hpp"
 
-//---------------------------------------------------------------------
-
-RasterizerState::RasterizerState()
-: _scissorTestEnabled(false)
-, _cullMode(CullMode::CullCounterClockwiseFace)
-, _fillMode(FillMode::Solid)
-, _depthBias(0.0f)
-, _slopeScaleDepthBias(0.0f)
-{ }
-
-//---------------------------------------------------------------------
-
-RasterizerState::~RasterizerState()
+namespace Lithium
 {
-	release();
-}
+	/**
+	 * Represents the binding of a DepthStencilState to OpenGL.
+	 *
+	 * OpenGL doesn't actually bind a DepthStencilState. This binding is
+	 * emulated to keep parity with DirectX.
+	 *
+	 * \author Don Olmstead
+	 * \version 0.1
+	 */
+	struct DepthStencilStateBinding
+	{
+
+	} ; // end struct DepthStencilStateBinding
+
+} // end namespace Lithium
+
+#endif // end LITHIUM_DEPTH_STENCIL_STATE_BINDING_HPP_INCLUDED

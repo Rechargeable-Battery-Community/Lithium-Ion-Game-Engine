@@ -31,7 +31,7 @@ using namespace Lithium;
 
 KeyboardState::KeyboardState()
 {
-	for (std::int32_t i = 0; i < Keys::Size; ++i)
+	for (std::size_t i = 0; i < Keys::Size; ++i)
 		_keyStates[i] = KeyState::Up;
 }
 
@@ -39,7 +39,7 @@ KeyboardState::KeyboardState()
 
 KeyboardState::KeyboardState(const KeyboardState& copy)
 {
-	for (std::int32_t i = 0; i < Keys::Size; ++i)
+	for (std::size_t i = 0; i < Keys::Size; ++i)
 		_keyStates[i] = copy._keyStates[i];
 }
 
@@ -47,7 +47,7 @@ KeyboardState::KeyboardState(const KeyboardState& copy)
 
 KeyboardState& KeyboardState::operator= (const KeyboardState& copy)
 {
-	for (std::int32_t i = 0; i < Keys::Size; ++i)
+	for (std::size_t i = 0; i < Keys::Size; ++i)
 		_keyStates[i] = copy._keyStates[i];
 
 	return *this;

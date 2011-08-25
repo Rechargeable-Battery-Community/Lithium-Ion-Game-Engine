@@ -356,17 +356,18 @@ namespace Lithium
 		// Member variables
 		//----------------------------------------------------------------------
 
-		public:
+		private:
 
 			/// Whether the depth buffer is enabled
 			bool _depthEnabled;
 			/// Whether writing to the depth buffer is enabled
 			bool _depthWriteEnabled;
-			/// Comparison function for the depth buffer test
-			CompareFunction::Enum _depthFunction;
-
 			/// Whether the stencil buffer is enabled
 			bool _stencilEnabled;
+			
+			/// Comparison function for the depth buffer test
+			CompareFunction::Enum _depthFunction;
+			
 			/// Stencil buffer read mask
 			std::int32_t _stencilBufferReadMask;
 			/// Stencil buffer write mask	

@@ -30,11 +30,11 @@ using namespace Lithium;
 namespace
 {
 	/// The maximum number of terminators
-	const std::int32_t __maxTerminators = 128;
+	const std::size_t __maxTerminators = 128;
 	/// The individual terminators
 	Terminator::TermFunction __terminators[__maxTerminators];
 	/// The number of terminators
-	std::int32_t __terminatorCount = 0;
+	std::size_t __terminatorCount = 0;
 
 } // end namespace
 
@@ -51,6 +51,6 @@ void Terminator::addTerminator(Terminator::TermFunction term)
 
 void Terminator::execute()
 {
-	for (std::int32_t i = 0; i < __terminatorCount; ++i)
+	for (std::size_t i = 0; i < __terminatorCount; ++i)
 		__terminators[i]();
 }

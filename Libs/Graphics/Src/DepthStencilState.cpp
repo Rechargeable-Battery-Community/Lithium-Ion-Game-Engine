@@ -31,6 +31,21 @@ LITHIUM_IMPLEMENT_TYPE_INFO(Lithium, DepthStencilState, GraphicsResource);
 //---------------------------------------------------------------------
 
 DepthStencilState::DepthStencilState()
+: _depthEnabled(true)
+, _depthWriteEnabled(true)
+, _depthFunction(CompareFunction::LessEqual)
+, _stencilEnabled(false)
+, _stencilBufferReadMask(0xFFFFFFFF)
+, _stencilWriteMask(0xFFFFFFFF)
+, _stencilReference(0)
+, _frontStencilFunction(CompareFunction::Always)
+, _frontStencilPassOperation(StencilOperation::Keep)
+, _frontStencilFailOperation(StencilOperation::Keep)
+, _frontStencilPassDepthFailOperation(StencilOperation::Keep)
+, _backStencilFunction(CompareFunction::Always)
+, _backStencilPassOperation(StencilOperation::Keep)
+, _backStencilFailOperation(StencilOperation::Keep)
+, _backStencilPassDepthFailOperation(StencilOperation::Keep)
 { }
 
 //---------------------------------------------------------------------

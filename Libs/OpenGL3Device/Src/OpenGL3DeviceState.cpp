@@ -25,6 +25,8 @@
 
 #include <Lithium/Graphics/GraphicsDevice.hpp>
 #include "BlendStateBinding.hpp"
+#include "DepthStencilStateBinding.hpp"
+#include "RasterizerStateBinding.hpp"
 using namespace Lithium;
 
 namespace
@@ -91,26 +93,65 @@ void GraphicsDevice::releaseBlendState(BlendState* state)
 
 void GraphicsDevice::bindDepthStencilState(DepthStencilState* state)
 {
-	
+	DepthStencilStateBinding* binding = new DepthStencilStateBinding();
+
+	state->setDevice(this, binding);
 }
 
 //---------------------------------------------------------------------
 
 void GraphicsDevice::releaseDepthStencilState(DepthStencilState* state)
 {
+	DepthStencilStateBinding* binding = (DepthStencilStateBinding*)state->getResources();
 
+	delete binding;
+
+	state->setDevice(0, 0);
 }
 
 //---------------------------------------------------------------------
 
 void GraphicsDevice::bindRasterizerState(RasterizerState* state)
 {
+	RasterizerStateBinding* binding = new RasterizerStateBinding();
 
+	binding->scissorTestEnabled = state->isScissorTestEnabled();
+
+	// Set the culling information
+	CullMode::Enum cullMode = state->getCullMode();
+
+	binding->cullFace = GL_BACK;
+
+	if (cullMode != CullMode::None)
+	{
+		binding->cullEnabled = GL_FALSE;
+		
+		if (cullMode == CullMode::CullClockwiseFace)
+			binding->frontFace = GL_CW;
+		else
+			binding->frontFace = GL_CCW;
+	}
+	else
+	{
+		binding->cullEnabled = GL_FALSE;
+		binding->frontFace = GL_CCW;
+	}
+
+	// Set the polygon information
+	binding->fillMode = (state->getFillMode() == FillMode::Solid) ? GL_FILL : GL_LINE;
+	binding->depthBias = state->getDepthBias();
+	binding->depthScale = state->getSlopeScaleDepthBias();
+
+	state->setDevice(this, binding);
 }
 
 //---------------------------------------------------------------------
 
 void GraphicsDevice::releaseRasterizerState(RasterizerState* state)
 {
+	RasterizerStateBinding* binding = (RasterizerStateBinding*)state->getResources();
 
+	delete binding;
+
+	state->setDevice(0, 0);
 }

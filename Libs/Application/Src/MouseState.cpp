@@ -33,7 +33,7 @@ MouseState::MouseState()
 : _xPosition(0)
 , _yPosition(0)
 {
-	for (std::int32_t i = 0; i < MouseButtons::Size; ++i)
+	for (std::size_t i = 0; i < MouseButtons::Size; ++i)
 		_buttonStates[i] = ButtonState::Released;
 }
 
@@ -43,7 +43,7 @@ MouseState::MouseState(const MouseState& copy)
 : _xPosition(copy._xPosition)
 , _yPosition(copy._yPosition)
 {
-	for (std::int32_t i = 0; i < MouseButtons::Size; ++i)
+	for (std::size_t i = 0; i < MouseButtons::Size; ++i)
 		_buttonStates[i] = copy._buttonStates[i];
 }
 
@@ -54,7 +54,7 @@ MouseState& MouseState::operator= (const MouseState& copy)
 	_xPosition = copy._xPosition;
 	_yPosition = copy._yPosition;
 
-	for (std::int32_t i = 0; i < MouseButtons::Size; ++i)
+	for (std::size_t i = 0; i < MouseButtons::Size; ++i)
 		_buttonStates[i] = copy._buttonStates[i];
 
 	return *this;
@@ -67,7 +67,7 @@ bool MouseState::operator== (const MouseState& compare) const
 	if ((_xPosition != compare._xPosition) || (_yPosition != compare._yPosition))
 		return false;
 
-	for (std::int32_t i = 0; i < MouseButtons::Size; ++i)
+	for (std::size_t i = 0; i < MouseButtons::Size; ++i)
 		if (_buttonStates[i] != compare._buttonStates[i])
 			return false;
 
@@ -81,7 +81,7 @@ bool MouseState::operator!= (const MouseState& compare) const
 	if ((_xPosition != compare._xPosition) || (_yPosition != compare._yPosition))
 		return true;
 
-	for (std::int32_t i = 0; i < MouseButtons::Size; ++i)
+	for (std::size_t i = 0; i < MouseButtons::Size; ++i)
 		if (_buttonStates[i] != compare._buttonStates[i])
 			return true;
 

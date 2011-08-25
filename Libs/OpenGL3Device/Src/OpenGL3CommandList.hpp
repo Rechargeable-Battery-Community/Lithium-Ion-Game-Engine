@@ -111,10 +111,8 @@ namespace Lithium
 			 * \param i The index of the GraphicsCommand.
 			 * \returns The GraphicsCommand at the specified index.
 			 */
-			inline const GraphicsCommand& operator[] (std::int32_t i) const
+			inline const GraphicsCommand& operator[] (std::size_t i) const
 			{
-				LITHIUM_ASSERT((i >= 0) && (i < _currentCommand), "Invalid index");
-
 				return _commands[i];
 			}
 
@@ -128,9 +126,23 @@ namespace Lithium
 			/**
 			 * Sets the BlendStateBinding to use.
 			 *
-			 * \param blendState The BlendStateBinding to use.
+			 * \param state The BlendStateBinding to use.
 			 */
-			void setBlendStateBinding(const BlendStateBinding* binding);
+			void setBlendStateBinding(const BlendStateBinding* state);
+
+			/**
+			 * Sets the DepthStencilStateBinding to use.
+			 *
+			 * \param state The DepthStencilStateBinding to use.
+			 */
+			void setDepthStencilStateBinding(const DepthStencilStateBinding* state);
+
+			/**
+			 * Sets the RasterizerStateBinding to use.
+			 *
+			 * \param state The RasterizerStateBinding to use.
+			 */
+			void setRasterizerStateBinding(const RasterizerStateBinding* state);
 
 		//----------------------------------------------------------------------
 		// Member variables
@@ -141,14 +153,17 @@ namespace Lithium
 			friend class GraphicsDeviceContext;
 
 			/// The maximum number of commands
-			static const std::int32_t __maxCommands = 256;
+			static const std::size_t __maxCommands = 256;
+
+			/// An array of GraphicsCommands
+			typedef std::tr1::array<GraphicsCommand, __maxCommands> GraphicsCommandArray;
 
 			/// Whether commands are still being generated
 			bool _finished;
 			/// The index of the current command being generated
-			std::int32_t _currentCommand;
+			std::size_t _currentCommand;
 			/// The GraphicsCommands to execute
-			GraphicsCommand _commands[__maxCommands];
+			GraphicsCommandArray _commands;
 
 	} ; // end class GraphicsCommandList
 

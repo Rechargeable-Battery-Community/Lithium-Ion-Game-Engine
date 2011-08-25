@@ -27,6 +27,8 @@
 #define LITHIUM_OPENGL3_COMMAND_HPP_INCLUDED
 
 #include "BlendStateBinding.hpp"
+#include "DepthStencilStateBinding.hpp"
+#include "RasterizerStateBinding.hpp"
 
 namespace Lithium
 {
@@ -47,6 +49,10 @@ namespace Lithium
 
 		/// The BlendState to use
 		const BlendStateBinding* blendState;
+		/// The DepthStencilState to use
+		const DepthStencilStateBinding* depthStencilState;
+		/// The RasterizerState to use
+		const RasterizerStateBinding* rasterizerState;
 	} ;
 
 	/**

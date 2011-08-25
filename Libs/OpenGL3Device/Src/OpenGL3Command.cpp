@@ -29,19 +29,62 @@ using namespace Lithium;
 
 namespace
 {
-	void setBlendState(const BlendStateBinding* binding)
+	/**
+	 * Sets the blend state within OpenGL.
+	 *
+	 * \param state The blend state information.
+	 */
+	void setBlendState(const BlendStateBinding* state)
 	{
 		glBlendEquationSeparate(
-			binding->colorFunction,
-			binding->alphaFunction
+			state->colorFunction,
+			state->alphaFunction
 		);
 
 		glBlendFuncSeparate(
-			binding->colorSource,
-			binding->colorDestination,
-			binding->alphaSource,
-			binding->alphaDestination
+			state->colorSource,
+			state->colorDestination,
+			state->alphaSource,
+			state->alphaDestination
 		) ;
+	}
+
+	/**
+	 * Sets the depth stencil state within OpenGL.
+	 *
+	 * \param state The depth stencil state information.
+	 */
+	void setDepthStencilState(const DepthStencilStateBinding* state)
+	{
+
+	}
+
+	/**
+	 * Sets the rasterizer state within OpenGL.
+	 *
+	 * \param state The rasterizer state information.
+	 */
+	void setRasterizerState(const RasterizerStateBinding* state)
+	{
+		if (state->scissorTestEnabled)
+			glEnable(GL_SCISSOR_TEST);
+		else
+			glDisable(GL_SCISSOR_TEST);
+
+		if (state->cullEnabled)
+		{
+			glEnable(GL_CULL_FACE);
+			glCullFace(state->cullFace);
+			glFrontFace(state->frontFace);
+		}
+		else
+		{
+			glDisable(GL_CULL_FACE);
+		}
+
+		glEnable(GL_POLYGON_OFFSET_FILL);
+		glPolygonMode(GL_FRONT_AND_BACK, state->fillMode);
+		glPolygonOffset(state->depthScale, state->depthBias);
 	}
 
 } // end anonymous namespace
@@ -51,4 +94,6 @@ namespace
 void Lithium::executeCommand(const GraphicsCommand& command)
 {
 	setBlendState(command.blendState);
+	setDepthStencilState(command.depthStencilState);
+	setRasterizerState(command.rasterizerState);
 }

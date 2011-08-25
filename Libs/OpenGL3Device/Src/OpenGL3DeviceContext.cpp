@@ -79,3 +79,29 @@ void GraphicsDeviceContext::setBlendState(const BlendState* state)
 
 	_commandList->setBlendStateBinding(binding);
 }
+
+//---------------------------------------------------------------------
+
+void GraphicsDeviceContext::setDepthStencilState(const DepthStencilState* state)
+{
+	_depthStencilState = state;
+
+	const DepthStencilStateBinding* binding = (const DepthStencilStateBinding*)state->getResources();
+	LITHIUM_ASSERT(binding, "Resource has not been bound");
+	LITHIUM_ASSERT(state->getDevice() == _device, "Resource is not bound to this device");
+
+	_commandList->setDepthStencilStateBinding(binding);
+}
+
+//---------------------------------------------------------------------
+
+void GraphicsDeviceContext::setRasterizerState(const RasterizerState* state)
+{
+	_rasterizerState = state;
+
+	const RasterizerStateBinding* binding = (const RasterizerStateBinding*)state->getResources();
+	LITHIUM_ASSERT(binding, "Resource has not been bound");
+	LITHIUM_ASSERT(state->getDevice() == _device, "Resource is not bound to this device");
+
+	_commandList->setRasterizerStateBinding(binding);
+}

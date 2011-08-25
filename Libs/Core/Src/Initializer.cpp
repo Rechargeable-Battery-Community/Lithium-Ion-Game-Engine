@@ -30,11 +30,11 @@ using namespace Lithium;
 namespace
 {
 	/// The maximum number of initializers
-	const std::int32_t __maxInitializers = 128;
+	const std::size_t __maxInitializers = 128;
 	/// The individual initializers
 	Initializer::InitFunction __initializers[__maxInitializers];
 	/// The number of initializers
-	std::int32_t __initializerCount = 0;
+	std::size_t __initializerCount = 0;
 
 } // end namespace
 
@@ -51,6 +51,6 @@ void Initializer::addInitializer(Initializer::InitFunction init)
 
 void Initializer::execute()
 {
-	for (std::int32_t i = 0; i < __initializerCount; ++i)
+	for (std::size_t i = 0; i < __initializerCount; ++i)
 		__initializers[i]();
 }

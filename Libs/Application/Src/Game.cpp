@@ -48,6 +48,8 @@ VertexShader* __vertexShader;
 PixelShader* __pixelShader;
 
 BlendState* __blendState;
+DepthStencilState* __depthStencilState;
+RasterizerState* __rasterizerState;
 
 //---------------------------------------------------------------------
 
@@ -80,6 +82,12 @@ void Game::initialize()
 
 	__blendState = new BlendState();
 	_graphicsDevice->bind(__blendState);
+
+	__depthStencilState = new DepthStencilState();
+	_graphicsDevice->bind(__depthStencilState);
+
+	__rasterizerState = new RasterizerState();
+	_graphicsDevice->bind(__rasterizerState);
 	/*
 	__vertexShader = new VertexShader();
 	__pixelShader = new PixelShader();
@@ -103,6 +111,8 @@ void Game::initialize()
 void Game::terminate()
 {
 	delete __blendState;
+	delete __depthStencilState;
+	delete __rasterizerState;
 }
 
 //---------------------------------------------------------------------
@@ -125,6 +135,8 @@ void Game::draw()
 	GraphicsDeviceContext* context = _graphicsDevice->getContext();
 	context->begin();
 	context->setBlendState(__blendState);
+	context->setDepthStencilState(__depthStencilState);
+	context->setRasterizerState(__rasterizerState);
 	context->draw();
 	context->end();
 	_graphicsDevice->execute(context);

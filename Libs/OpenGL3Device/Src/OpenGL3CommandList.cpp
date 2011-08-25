@@ -63,9 +63,27 @@ void GraphicsCommandList::end()
 
 //---------------------------------------------------------------------
 
-void GraphicsCommandList::setBlendStateBinding(const BlendStateBinding* binding)
+void GraphicsCommandList::setBlendStateBinding(const BlendStateBinding* state)
 {
 	LITHIUM_ASSERT(!_finished, "Command building has not started");
 
-	_commands[_currentCommand].blendState = binding;
+	_commands[_currentCommand].blendState = state;
+}
+
+//---------------------------------------------------------------------
+
+void GraphicsCommandList::setDepthStencilStateBinding(const DepthStencilStateBinding* state)
+{
+	LITHIUM_ASSERT(!_finished, "Command building has not started");
+
+	_commands[_currentCommand].depthStencilState = state;
+}
+
+//---------------------------------------------------------------------
+
+void GraphicsCommandList::setRasterizerStateBinding(const RasterizerStateBinding* state)
+{
+	LITHIUM_ASSERT(!_finished, "Command building has not started");
+
+	_commands[_currentCommand].rasterizerState = state;
 }

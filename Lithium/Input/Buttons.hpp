@@ -103,6 +103,7 @@ namespace Lithium
 
 		} ; // end enum Enum
 
+		/// Debugging information
 		struct Names
 		{
 			/// DPadUp flag

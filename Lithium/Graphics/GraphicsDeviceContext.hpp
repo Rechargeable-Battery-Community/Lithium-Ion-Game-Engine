@@ -27,6 +27,8 @@
 #define LITHIUM_GRAPHICS_DEVICE_CONTEXT_HPP_INCLUDED
 
 #include <Lithium/Graphics/BlendState.hpp>
+#include <Lithium/Graphics/DepthStencilState.hpp>
+#include <Lithium/Graphics/RasterizerState.hpp>
 
 namespace Lithium
 {
@@ -148,14 +150,14 @@ namespace Lithium
 			 *
 			 * \param state The DepthStencilState to use.
 			 */
-			void setDepthStencilState();
+			void setDepthStencilState(const DepthStencilState* state);
 
 			/**
 			 * Sets the current RasterizerState used for rendering.
 			 *
 			 * \param state The RasterizerState to use.
 			 */
-			void setRasterizerState();
+			void setRasterizerState(const RasterizerState* state);
 
 		//----------------------------------------------------------------------
 		// Member variables
@@ -171,6 +173,10 @@ namespace Lithium
 			const GraphicsDevice* _device;
 			/// The current BlendState
 			const BlendState* _blendState;
+			/// The current DepthStencilState
+			const DepthStencilState* _depthStencilState;
+			/// The current RasterizerState
+			const RasterizerState* _rasterizerState;
 
 	} ; // end class GraphicsDeviceContext
 
