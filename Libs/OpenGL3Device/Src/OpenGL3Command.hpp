@@ -29,6 +29,8 @@
 #include "BlendStateBinding.hpp"
 #include "DepthStencilStateBinding.hpp"
 #include "RasterizerStateBinding.hpp"
+#include "TextureBinding.hpp"
+#include "SamplerStateBinding.hpp"
 
 namespace Lithium
 {
@@ -53,6 +55,9 @@ namespace Lithium
 		const DepthStencilStateBinding* depthStencilState;
 		/// The RasterizerState to use
 		const RasterizerStateBinding* rasterizerState;
+
+		const TextureBinding* texture;
+		const SamplerStateBinding* samplerState;
 	} ;
 
 	/**

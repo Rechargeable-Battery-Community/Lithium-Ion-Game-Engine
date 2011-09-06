@@ -37,7 +37,7 @@ namespace Lithium
 	 * \author Don Olmstead
 	 * \version 0.1
 	 */
-	class Object
+	class LITHIUM_CORE_ITEM Object
 	{
 		//----------------------------------------------------------------------
 		// Construction/Destruction
@@ -50,12 +50,10 @@ namespace Lithium
 			 */
 			Object();
 
-		public:
-
 			/**
 			 * Destroys an instance of the Object class.
 			 */
-			virtual ~Object();
+			~Object();
 
 		//----------------------------------------------------------------------
 		// Class information

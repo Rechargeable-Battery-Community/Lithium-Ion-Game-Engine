@@ -62,7 +62,7 @@ void GameWindow::createContext()
 	{
 		WGL_CONTEXT_MAJOR_VERSION_ARB, LITHIUM_GL_MAJOR_VERSION,
 		WGL_CONTEXT_MINOR_VERSION_ARB, LITHIUM_GL_MINOR_VERSION,
-		WGL_CONTEXT_FLAGS_ARB, 0,//WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB,
+		WGL_CONTEXT_FLAGS_ARB, WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB,//WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB,
 		0
 	};
 
@@ -71,8 +71,10 @@ void GameWindow::createContext()
 
 	HGLRC hRC;
 
-	if (wglCreateContextAttribsARB)
-		hRC = wglCreateContextAttribsARB(hDC, 0, attributes);
+//	if (wglCreateContextAttribsARB)
+//		hRC = wglCreateContextAttribsARB(hDC, 0, attributes);
+//	else
+		hRC = tempContext;
 
 	// Initialize the API
 	wglMakeCurrent(hDC, hRC);
@@ -80,7 +82,7 @@ void GameWindow::createContext()
 	wglMakeCurrent(0, 0);
 
 	// Delete the temporary context
-	wglDeleteContext(tempContext);
+	//wglDeleteContext(tempContext);
 
 	// Create the graphics context
 	_context = new GraphicsContext();

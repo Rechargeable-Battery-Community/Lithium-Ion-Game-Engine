@@ -35,9 +35,9 @@ namespace Lithium
 	{
 		typedef void (*TermFunction)();
 
-		void addTerminator(TermFunction term);
+		LITHIUM_CORE_ITEM void addTerminator(TermFunction term);
 
-		void execute();
+		LITHIUM_CORE_ITEM void execute();
 
 	} // end namespace Terminator
 

@@ -155,5 +155,5 @@ void GraphicsAPI::initialize()
 	// Set global state
 	//----------------------------------------------------------------------
 
-	glEnable(GL_SCISSOR_TEST);
+	glEnable(GL_TEXTURE_2D);
 }

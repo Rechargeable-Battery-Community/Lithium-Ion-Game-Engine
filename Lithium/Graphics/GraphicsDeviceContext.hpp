@@ -29,6 +29,7 @@
 #include <Lithium/Graphics/BlendState.hpp>
 #include <Lithium/Graphics/DepthStencilState.hpp>
 #include <Lithium/Graphics/RasterizerState.hpp>
+#include <Lithium/Graphics/Texture2D.hpp>
 
 namespace Lithium
 {
@@ -159,6 +160,8 @@ namespace Lithium
 			 */
 			void setRasterizerState(const RasterizerState* state);
 
+			void setTexture(const Texture2D* texture);
+
 		//----------------------------------------------------------------------
 		// Member variables
 		//----------------------------------------------------------------------
@@ -177,6 +180,8 @@ namespace Lithium
 			const DepthStencilState* _depthStencilState;
 			/// The current RasterizerState
 			const RasterizerState* _rasterizerState;
+			
+			const Texture2D* _texture;
 
 	} ; // end class GraphicsDeviceContext
 

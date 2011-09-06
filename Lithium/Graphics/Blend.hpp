@@ -28,8 +28,15 @@
 
 namespace Lithium
 {
+	/**
+	 * Defines color blending factors.
+	 *
+	 * \author Don Olmstead
+	 * \version 0.1
+	 */
 	namespace Blend
 	{
+		/// An enumerated type
 		enum Enum
 		{
 			/**

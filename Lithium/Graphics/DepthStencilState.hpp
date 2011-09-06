@@ -57,7 +57,7 @@ namespace Lithium
 			/**
 			 * Destroys an instance of the DepthStencilState class.
 			 */
-			virtual ~DepthStencilState();
+			~DepthStencilState();
 
 		//----------------------------------------------------------------------
 		// Properties

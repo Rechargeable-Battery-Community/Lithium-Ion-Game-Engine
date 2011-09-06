@@ -1,5 +1,5 @@
 /**
- * \file Texture.hpp
+ * \file SamplerStateBinding.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,49 +23,37 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_TEXTURE_HPP_INCLUDED
-#define LITHIUM_TEXTURE_HPP_INCLUDED
+#ifndef LITHIUM_SAMPLER_STATE_BINDING_HPP_INCLUDED
+#define LITHIUM_SAMPLER_STATE_BINDING_HPP_INCLUDED
 
-#include <Lithium/Graphics/GraphicsResource.hpp>
-#include <Lithium/Graphics/SurfaceFormat.hpp>
+#include "GLPlatform.hpp"
 
 namespace Lithium
 {
-	class Texture : public GraphicsResource
+	/**
+	 * Represents the binding of a SamplerStateBinding to OpenGL.
+	 *
+	 * OpenGL doesn't actually bind a SamplerStateBinding. This binding is
+	 * emulated to keep parity with DirectX.
+	 *
+	 * \author Don Olmstead
+	 * \version 0.1
+	 */
+	struct SamplerStateBinding
 	{
-		protected:
+		/// The type of filtering during minification
+		GLenum minFilter;
+		/// The type of filtering during magnification
+		GLenum magFilter;
+		/// The address mode for the the u coordinate
+		GLenum addressModeU;
+		/// The address mode for the the v coordinate
+		GLenum addressModeV;
+		/// The address mode for the the w coordinate
+		GLenum addressModeW;
 
-			/**
-			 * Creates an instance of the Texture class.
-			 *
-			 * \param format The format of the texture data
-			 */
-			Texture(SurfaceFormat::Enum format);
-
-			/**
-			 * Destroys an instance of the Texture class.
-			 */
-			~Texture();
-
-		public:
-
-			/**
-			 * Gets the format of the texture data.
-			 *
-			 * \returns The format of the texture data.
-			 */
-			inline SurfaceFormat::Enum getSurfaceFormat() const
-			{
-				return _surfaceFormat;
-			}
-
-		private:
-
-			/// The format of the texture data
-			SurfaceFormat::Enum _surfaceFormat;
-
-	} ; // end class Texture
+	} ; // end struct SamplerStateBinding
 
 } // end namespace Lithium
 
-#endif // end LITHIUM_TEXTURE_HPP_INCLUDED
+#endif // end LITHIUM_SAMPLER_STATE_BINDING_HPP_INCLUDED

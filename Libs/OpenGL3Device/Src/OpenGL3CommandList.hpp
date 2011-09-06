@@ -144,6 +144,8 @@ namespace Lithium
 			 */
 			void setRasterizerStateBinding(const RasterizerStateBinding* state);
 
+			void setTextureBinding(const TextureBinding* texture);
+
 		//----------------------------------------------------------------------
 		// Member variables
 		//----------------------------------------------------------------------

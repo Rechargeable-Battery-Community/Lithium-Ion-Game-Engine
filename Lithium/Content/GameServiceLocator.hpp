@@ -1,5 +1,5 @@
 /**
- * \file Texture2D.hpp
+ * \file GameServiceLocator.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,26 +23,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_TEXTURE_2D_HPP_INCLUDED
-#define LITHIUM_TEXTURE_2D_HPP_INCLUDED
+#ifndef LITHIUM_GAME_SERVICE_LOCATOR_HPP_INCLUDED
+#define LITHIUM_GAME_SERVICE_LOCATOR_HPP_INCLUDED
 
-#include <Lithium/Graphics/Texture.hpp>
+#include <Lithium/Graphics/GraphicsDevice.hpp>
 
 namespace Lithium
 {
-	class Texture2D : public Texture
+	class GameServiceLocator
 	{
+		//----------------------------------------------------------------------
+		// Construction
+		//----------------------------------------------------------------------
+
 		public:
 
 			/**
-			 * Initializes an instance of the Texture2D class.
-			 *
-			 * \param device The GraphicsDevice to bind to.
-			 * \param width The width of the texture.
-			 * \param height The height of the texture.
-			 * \param data The texture data.
+			 * Creates an instance of the GameServiceLocator class.
 			 */
-			Texture2D(GraphicsDevice* device, std::int32_t width, std::int32_t height, const void* data = 0);
+			GameServiceLocator();
 
 		//----------------------------------------------------------------------
 		// Properties
@@ -51,23 +50,23 @@ namespace Lithium
 		public:
 
 			/**
-			 * Gets the width of the texture.
+			 * Gets the associated GraphicsDevice.
 			 *
-			 * \returns The width of the texture.
+			 * \returns The associated GraphicsDevice.
 			 */
-			inline std::int32_t getWidth() const
+			inline GraphicsDevice* getGraphicsDevice() const
 			{
-				return _width;
+				return _graphicsDevice;
 			}
 
 			/**
-			 * Gets the height of the texture.
+			 * Sets the associated GraphicsDevice.
 			 *
-			 * \returns The height of the texture.
+			 * \param device The associated GraphicsDevice.
 			 */
-			inline std::int32_t getHeight() const
+			inline void setGraphicsDevice(GraphicsDevice* device)
 			{
-				return _height;
+				_graphicsDevice = device;
 			}
 
 		//----------------------------------------------------------------------
@@ -76,13 +75,11 @@ namespace Lithium
 
 		private:
 
-			/// The width of the texture
-			std::int32_t _width;
-			/// The height of the texture
-			std::int32_t _height;
+			/// The associated GraphicsDevice
+			GraphicsDevice* _graphicsDevice;
 
-	} ; // end class Texture2D
+	} ; // end class GameServiceLocator
 
 } // end namespace Lithium
 
-#endif // end LITHIUM_TEXTURE_2D_HPP_INCLUDED
+#endif // end LITHIUM_GAME_SERVICE_LOCATOR_HPP_INCLUDED

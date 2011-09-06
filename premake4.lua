@@ -93,6 +93,27 @@ solution "Lithium"
 			"Lithium.Network"
 		}
 
+	-- Content project
+	project "Lithium.Content"
+		language "C++"
+		kind "StaticLib"
+		location "Libs/Content/Build"
+		files
+		{
+			-- Header files
+			"Lithium/LithiumContent.hpp",
+			"Lithium/LithiumContentLIB.hpp",
+			"Lithium/Content/*.hpp",
+
+			-- Source files
+			"Libs/Content/Src/*.cpp",
+			"Libs/Content/Src/*.hpp"
+		}
+		links
+		{
+			"Lithium.Graphics"
+		}
+
 	-- Http project
 	project "Lithium.HttpServer"
 		language "C++"
@@ -158,7 +179,8 @@ solution "Lithium"
 			"Lithium.Graphics",
 			"Lithium.Network",
 			"Lithium.OpenGL3Device",
-			"Lithium.HttpServer"
+			"Lithium.HttpServer",
+			"Lithium.Content"
 		}
 
 --[[

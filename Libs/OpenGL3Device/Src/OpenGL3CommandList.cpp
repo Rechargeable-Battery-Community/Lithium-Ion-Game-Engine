@@ -87,3 +87,12 @@ void GraphicsCommandList::setRasterizerStateBinding(const RasterizerStateBinding
 
 	_commands[_currentCommand].rasterizerState = state;
 }
+
+//---------------------------------------------------------------------
+
+void GraphicsCommandList::setTextureBinding(const TextureBinding* texture)
+{
+	LITHIUM_ASSERT(!_finished, "Command building has not started");
+
+	_commands[_currentCommand].texture = texture;
+}

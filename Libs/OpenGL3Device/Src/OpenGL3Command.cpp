@@ -87,6 +87,11 @@ namespace
 		glPolygonOffset(state->depthScale, state->depthBias);
 	}
 
+	void setTexture(const TextureBinding* texture)
+	{
+		glBindTexture(GL_TEXTURE_2D, texture->id);
+	}
+
 } // end anonymous namespace
 
 //---------------------------------------------------------------------
@@ -96,4 +101,5 @@ void Lithium::executeCommand(const GraphicsCommand& command)
 	setBlendState(command.blendState);
 	setDepthStencilState(command.depthStencilState);
 	setRasterizerState(command.rasterizerState);
+	setTexture(command.texture);
 }

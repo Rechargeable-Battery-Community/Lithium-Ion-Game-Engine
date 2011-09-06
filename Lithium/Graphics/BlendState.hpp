@@ -57,7 +57,7 @@ namespace Lithium
 			/**
 			 * Destroys an instance of the BlendState class.
 			 */
-			virtual ~BlendState();
+			~BlendState();
 
 		//----------------------------------------------------------------------
 		// Properties

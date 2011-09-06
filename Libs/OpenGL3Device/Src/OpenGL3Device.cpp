@@ -32,8 +32,14 @@ using namespace Lithium;
 
 void GraphicsDevice::clear()
 {
-	glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); // Clear required buffers
+}
+
+//---------------------------------------------------------------------
+
+void GraphicsDevice::setClearColor(float r, float g, float b)
+{
+	glClearColor(r, g, b, 1.0f);
 }
 
 //---------------------------------------------------------------------

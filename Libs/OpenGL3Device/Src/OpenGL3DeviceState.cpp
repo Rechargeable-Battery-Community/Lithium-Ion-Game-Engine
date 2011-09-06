@@ -27,10 +27,15 @@
 #include "BlendStateBinding.hpp"
 #include "DepthStencilStateBinding.hpp"
 #include "RasterizerStateBinding.hpp"
+#include "SamplerStateBinding.hpp"
 using namespace Lithium;
 
 namespace
 {
+	//----------------------------------------------------------------------
+	// Blend state mappings
+	//----------------------------------------------------------------------
+
 	/// Mapping BlendFunction values to OpenGL
 	GLenum __blendFunctionMapping[BlendFunction::Size] =
 	{
@@ -57,6 +62,46 @@ namespace
 		GL_SRC_ALPHA_SATURATE,       // SourceAlphaSaturation
 		GL_CONSTANT_COLOR,           // BlendFactor
 		GL_ONE_MINUS_CONSTANT_COLOR  // InverseBlendFactor
+	} ;
+
+	//----------------------------------------------------------------------
+	// Sampler state mappings
+	//----------------------------------------------------------------------
+
+	/// Mapping values to OpenGL
+	GLenum __textureFilterMappingMin[TextureFilter::Size] =
+	{
+		GL_LINEAR,                 // Linear
+		GL_NEAREST,                // Point
+		0,                         // Anisotropic (Enabled through an extension)
+		GL_LINEAR_MIPMAP_NEAREST,  // LinearMipPoint
+		GL_NEAREST_MIPMAP_LINEAR,  // PointMipLinear
+		GL_LINEAR_MIPMAP_LINEAR,   // MinLinearMagPointMipLinear
+		GL_LINEAR_MIPMAP_NEAREST,  // MinLinearMagPointMipPoint
+		GL_NEAREST_MIPMAP_LINEAR,  // MinPointMagLinearMipLinear
+		GL_NEAREST_MIPMAP_NEAREST  // MinPointMagLinearMipPoint
+	} ;
+
+	/// Mapping values to OpenGL
+	GLenum __textureFilterMappingMag[TextureFilter::Size] =
+	{
+		GL_LINEAR,                 // Linear
+		GL_NEAREST,                // Point
+		0,                         // Anisotropic (Enabled through an extension)
+		GL_LINEAR_MIPMAP_NEAREST,  // LinearMipPoint
+		GL_NEAREST_MIPMAP_LINEAR,  // PointMipLinear
+		GL_NEAREST_MIPMAP_LINEAR,  // MinLinearMagPointMipLinear
+		GL_NEAREST_MIPMAP_NEAREST, // MinLinearMagPointMipPoint
+		GL_LINEAR_MIPMAP_LINEAR,   // MinPointMagLinearMipLinear
+		GL_LINEAR_MIPMAP_NEAREST   // MinPointMagLinearMipPoint
+	} ;
+
+	/// Mapping values to OpenGL
+	GLenum __textureAddressModeMapping[TextureAddressMode::Size] =
+	{
+		GL_CLAMP_TO_EDGE,   // Clamp
+		GL_MIRRORED_REPEAT, // Mirror
+		GL_REPEAT           // Wrap
 	} ;
 
 } // end anonymous namespace
@@ -150,6 +195,34 @@ void GraphicsDevice::bindRasterizerState(RasterizerState* state)
 void GraphicsDevice::releaseRasterizerState(RasterizerState* state)
 {
 	RasterizerStateBinding* binding = (RasterizerStateBinding*)state->getResources();
+
+	delete binding;
+
+	state->setDevice(0, 0);
+}
+
+//---------------------------------------------------------------------
+
+void GraphicsDevice::bindSamplerState(SamplerState* state)
+{
+	SamplerStateBinding* binding = new SamplerStateBinding();
+
+	TextureFilter::Enum filter = state->getFilter();
+	binding->minFilter = __textureFilterMappingMin[filter];
+	binding->magFilter = __textureFilterMappingMag[filter];
+
+	binding->addressModeU = __textureAddressModeMapping[state->getAddressU()];
+	binding->addressModeV = __textureAddressModeMapping[state->getAddressV()];
+	binding->addressModeW = __textureAddressModeMapping[state->getAddressW()];
+
+	state->setDevice(this, binding);
+}
+
+//---------------------------------------------------------------------
+
+void GraphicsDevice::releaseSamplerState(SamplerState* state)
+{
+	SamplerStateBinding* binding = (SamplerStateBinding*)state->getResources();
 
 	delete binding;
 

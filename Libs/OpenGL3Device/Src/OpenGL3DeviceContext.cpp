@@ -105,3 +105,14 @@ void GraphicsDeviceContext::setRasterizerState(const RasterizerState* state)
 
 	_commandList->setRasterizerStateBinding(binding);
 }
+
+//---------------------------------------------------------------------
+
+void GraphicsDeviceContext::setTexture(const Texture2D* texture)
+{
+	const TextureBinding* binding = (const TextureBinding*)texture->getResources();
+	LITHIUM_ASSERT(binding, "Resource has not been bound");
+	LITHIUM_ASSERT(texture->getDevice() == _device, "Resource is not bound to this device");
+
+	_commandList->setTextureBinding(binding);
+}

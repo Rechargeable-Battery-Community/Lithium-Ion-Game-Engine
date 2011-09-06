@@ -50,7 +50,7 @@ namespace Lithium
 			/**
 			 * Destroys an instance of the RasterizerState class.
 			 */
-			virtual ~RasterizerState();
+			~RasterizerState();
 
 		//----------------------------------------------------------------------
 		// Properties

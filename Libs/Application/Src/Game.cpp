@@ -50,6 +50,7 @@ PixelShader* __pixelShader;
 BlendState* __blendState;
 DepthStencilState* __depthStencilState;
 RasterizerState* __rasterizerState;
+Texture2D* __texture;
 
 //---------------------------------------------------------------------
 
@@ -64,6 +65,10 @@ Game::~Game()
 {
 	if (_gameWindow)
 		delete _gameWindow;
+	if (_graphicsDevice)
+		delete _graphicsDevice;
+	if (_contentManager)
+		delete _contentManager;
 }
 
 //---------------------------------------------------------------------
@@ -75,6 +80,14 @@ void Game::initialize()
 
 	// Create the graphics device
 	_graphicsDevice = new GraphicsDevice();
+	_graphicsDevice->setClearColor(0.4f, 0.6f, 0.9f);
+
+	GameServiceLocator locator;
+	locator.setGraphicsDevice(_graphicsDevice);
+
+	_contentManager = new ContentManager(locator);
+
+	__texture = _contentManager->loadTexture2D("textures/Crate.bmp");
 
 	// Set the viewport
 	Viewport viewport(0, 0, _gameWindow->getWidth(), _gameWindow->getHeight());
@@ -113,6 +126,7 @@ void Game::terminate()
 	delete __blendState;
 	delete __depthStencilState;
 	delete __rasterizerState;
+	delete __texture;
 }
 
 //---------------------------------------------------------------------
@@ -137,25 +151,59 @@ void Game::draw()
 	context->setBlendState(__blendState);
 	context->setDepthStencilState(__depthStencilState);
 	context->setRasterizerState(__rasterizerState);
+	context->setTexture(__texture);
 	context->draw();
 	context->end();
 	_graphicsDevice->execute(context);
-
+	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glFrustum(-8.0, 8.0, -6.0, 6.0, 0.0, 100.0);
+	//glFrustum(-8.0, 8.0, -6.0, 6.0, 0.0, 100.0);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glTranslatef(0.0f, 0.0f, 1.0f);
+
+	glTranslatef(0.0f,0.0f,1.0f);
+	glRotatef(45.0f, 0.0f, 1.0f, 0.0f);
+
 	glBegin(GL_QUADS);
-		glVertex3f( 0.5f,  0.5f, 0.0f);
-		glColor3f(1.0f, 0.0f, 0.0f);
-		glVertex3f(-0.5f,  0.5f, 0.0f);
-		glColor3f(0.0f, 1.0f, 0.0f);
-		glVertex3f(-1.0f, -0.5f, 0.0f);
-		glColor3f(0.0f, 0.0f, 1.0f);
-		glVertex3f( 1.0f, -0.5f, 0.0f);
-		glColor3f(1.0f, 1.0f, 0.0f);
+		// Front Face
+		glNormal3f( 0.0f, 0.0f, 1.0f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(-0.5f, -0.5f,  0.5f);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f( 0.5f, -0.5f,  0.5f);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f( 0.5f,  0.5f,  0.5f);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(-0.5f,  0.5f,  0.5f);
+		// Back Face
+		glNormal3f( 0.0f, 0.0f,-1.0f);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(-0.5f, -0.5f, -0.5f);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(-0.5f,  0.5f, -0.5f);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f( 0.5f,  0.5f, -0.5f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f( 0.5f, -0.5f, -0.5f);
+		// Top Face
+		glNormal3f( 0.0f, 1.0f, 0.0f);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(-0.5f,  0.5f, -0.5f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(-0.5f,  0.5f,  0.5f);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f( 0.5f,  0.5f,  0.5f);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f( 0.5f,  0.5f, -0.5f);
+		// Bottom Face
+		glNormal3f( 0.0f,-1.0f, 0.0f);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(-0.5f, -0.5f, -0.5f);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f( 0.5f, -0.5f, -0.5f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f( 0.5f, -0.5f,  0.5f);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(-0.5f, -0.5f,  0.5f);
+		// Right face
+		glNormal3f( 1.0f, 0.0f, 0.0f);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f( 0.5f, -0.5f, -0.5f);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f( 0.5f,  0.5f, -0.5f);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f( 0.5f,  0.5f,  0.5f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f( 0.5f, -0.5f,  0.5f);
+		// Left Face
+		glNormal3f(-1.0f, 0.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(-0.5f, -0.5f, -0.5f);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(-0.5f, -0.5f,  0.5f);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(-0.5f,  0.5f,  0.5f);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(-0.5f,  0.5f, -0.5f);
 	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, 0);
 }

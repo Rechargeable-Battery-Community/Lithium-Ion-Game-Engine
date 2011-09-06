@@ -32,7 +32,7 @@
 #include <Lithium/Input/MouseButtons.hpp>
 #include <Lithium/Input/Keys.hpp>
 #include <Lithium/Input/KeyState.hpp>
-#include <Lithium/Graphics/GraphicsDevice.hpp>
+#include <Lithium/Content/ContentManager.hpp>
 
 namespace Lithium
 {
@@ -74,6 +74,7 @@ namespace Lithium
 		private:
 
 			GraphicsDevice* _graphicsDevice;
+			ContentManager* _contentManager;
 			GameWindow* _gameWindow;
 
 			std::int32_t createWindow();

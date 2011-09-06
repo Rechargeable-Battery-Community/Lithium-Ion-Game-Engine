@@ -410,12 +410,12 @@ std::int32_t Game::main(std::int32_t, char**)
 	// Create the window
 	instance->_gameWindow = new GameWindow("Lithium Application", 640, 480, false);
 
-	// Call the initialize method
-	instance->initialize();
-
 	// Show the window
 	instance->_gameWindow->showWindow();
 	instance->_gameWindow->makeContextCurrent();
+
+	// Call the initialize method
+	instance->initialize();
 
 	// Start the message pump
 	MSG msg = {0};

@@ -1,5 +1,5 @@
 /**
- * \file Initializer.cpp
+ * \file SamplerState.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,38 +23,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "LithiumCorePCH.hpp"
-#include <Lithium/System/Initializer.hpp>
+#include <Lithium/Graphics/SamplerState.hpp>
 using namespace Lithium;
 
-namespace
-{
-	/// The maximum number of initializers
-	const std::size_t __maxInitializers = 128;
-
-	/// An array of initializers
-	typedef std::tr1::array<Initializer::InitFunction, __maxInitializers> InitializerArray;
-
-	/// The individual initializers
-	InitializerArray __initializers;
-	/// The number of initializers
-	std::size_t __initializerCount = 0;
-
-} // end namespace
+LITHIUM_IMPLEMENT_TYPE_INFO(Lithium, SamplerState, GraphicsResource);
 
 //---------------------------------------------------------------------
 
-void Initializer::addInitializer(Initializer::InitFunction init)
-{
-	LITHIUM_ASSERT(__initializerCount < __maxInitializers, "Too many initialzers. Modify the maximum elements");
-
-	__initializers[__initializerCount++] = init;
-}
+SamplerState::SamplerState()
+: _textureFilter(TextureFilter::Linear)
+, _addressModeU(TextureAddressMode::Clamp)
+, _addressModeV(TextureAddressMode::Clamp)
+, _addressModeW(TextureAddressMode::Clamp)
+{ }
 
 //---------------------------------------------------------------------
 
-void Initializer::execute()
-{
-	for (std::size_t i = 0; i < __initializerCount; ++i)
-		__initializers[i]();
-}
+SamplerState::~SamplerState()
+{ }

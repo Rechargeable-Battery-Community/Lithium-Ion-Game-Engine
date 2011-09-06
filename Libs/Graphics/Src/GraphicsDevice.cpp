@@ -55,6 +55,8 @@ void GraphicsDevice::bind(GraphicsResource* resource)
 		bindDepthStencilState(static_cast<DepthStencilState*>(resource));
 	else if (resource->isExactly(RasterizerState::typeOf()))
 		bindRasterizerState(static_cast<RasterizerState*>(resource));
+	else if (resource->isExactly(SamplerState::typeOf()))
+		bindSamplerState(static_cast<SamplerState*>(resource));
 }
 
 //---------------------------------------------------------------------
@@ -67,4 +69,6 @@ void GraphicsDevice::release(GraphicsResource* resource)
 		releaseDepthStencilState(static_cast<DepthStencilState*>(resource));
 	else if (resource->isExactly(RasterizerState::typeOf()))
 		releaseRasterizerState(static_cast<RasterizerState*>(resource));
+	else if (resource->isExactly(SamplerState::typeOf()))
+		releaseSamplerState(static_cast<SamplerState*>(resource));
 }

@@ -1,5 +1,5 @@
 /**
- * \file Texture.hpp
+ * \file TextureBinding.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,49 +23,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_TEXTURE_HPP_INCLUDED
-#define LITHIUM_TEXTURE_HPP_INCLUDED
+#ifndef LITHIUM_TEXTURE_BINDING_HPP_INCLUDED
+#define LITHIUM_TEXTURE_BINDING_HPP_INCLUDED
 
-#include <Lithium/Graphics/GraphicsResource.hpp>
-#include <Lithium/Graphics/SurfaceFormat.hpp>
+#include "GLPlatform.hpp"
 
 namespace Lithium
 {
-	class Texture : public GraphicsResource
+	/**
+	 * Represents the binding of a Texture to OpenGL.
+	 *
+	 * \author Don Olmstead
+	 * \version 0.1
+	 */
+	struct TextureBinding
 	{
-		protected:
-
-			/**
-			 * Creates an instance of the Texture class.
-			 *
-			 * \param format The format of the texture data
-			 */
-			Texture(SurfaceFormat::Enum format);
-
-			/**
-			 * Destroys an instance of the Texture class.
-			 */
-			~Texture();
-
-		public:
-
-			/**
-			 * Gets the format of the texture data.
-			 *
-			 * \returns The format of the texture data.
-			 */
-			inline SurfaceFormat::Enum getSurfaceFormat() const
-			{
-				return _surfaceFormat;
-			}
-
-		private:
-
-			/// The format of the texture data
-			SurfaceFormat::Enum _surfaceFormat;
-
-	} ; // end class Texture
+		/// The identifier for the texture
+		GLuint id;
+	} ;
 
 } // end namespace Lithium
 
-#endif // end LITHIUM_TEXTURE_HPP_INCLUDED
+#endif // end LITHIUM_TEXTURE_BINDING_HPP_INCLUDED

@@ -48,12 +48,12 @@ namespace Lithium
 			 */
 			GraphicsResource();
 
-		public:
+		protected:
 
 			/**
 			 * Destroys an instance of the GraphicsResource class.
 			 */
-			virtual ~GraphicsResource();
+			~GraphicsResource();
 
 		public:
 

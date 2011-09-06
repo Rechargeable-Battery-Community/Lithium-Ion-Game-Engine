@@ -29,9 +29,11 @@
 #include <Lithium/Graphics/BlendState.hpp>
 #include <Lithium/Graphics/DepthStencilState.hpp>
 #include <Lithium/Graphics/RasterizerState.hpp>
+#include <Lithium/Graphics/SamplerState.hpp>
 #include <Lithium/Graphics/EffectPass.hpp>
 #include <Lithium/Graphics/Viewport.hpp>
 #include <Lithium/Graphics/GraphicsDeviceContext.hpp>
+#include <Lithium/Graphics/Texture2D.hpp>
 
 namespace Lithium
 {
@@ -53,6 +55,8 @@ namespace Lithium
 		public:
 
 			void clear();
+
+			void setClearColor(float r, float g, float b);
 
 			void setEffectPass(EffectPass* effect);
 
@@ -124,6 +128,20 @@ namespace Lithium
 			 */
 			void releaseRasterizerState(RasterizerState* state);
 
+			/**
+			 * Binds a SamplerState to the renderer.
+			 *
+			 * \param state The SamplerState to bind.
+			 */
+			void bindSamplerState(SamplerState* state);
+
+			/**
+			 * Releases a SamplerState from the renderer.
+			 *
+			 * \param state The SamplerState to release.
+			 */
+			void releaseSamplerState(SamplerState* state);
+
 			void createVertexShader(VertexShader* shader);
 			void createPixelShader(PixelShader* shader);
 			void createGeometryShader(GeometryShader* shader);
@@ -135,6 +153,9 @@ namespace Lithium
 			void createEffectPass(EffectPass* effect);
 			void destroyEffectPass(EffectPass* effect);
 
+			void bindTexture2D(Texture2D* texture, const void* data);
+			void releaseTexture2D(Texture2D* texture);
+
 			Viewport _viewport;
 
 		//----------------------------------------------------------------------
@@ -142,6 +163,8 @@ namespace Lithium
 		//----------------------------------------------------------------------
 
 		private:
+
+			friend class Texture2D;
 
 			/// The GraphicsDeviceContext associated with the device
 			GraphicsDeviceContext* _immediateContext;

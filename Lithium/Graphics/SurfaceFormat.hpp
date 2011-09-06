@@ -1,5 +1,5 @@
 /**
- * \file Texture.hpp
+ * \file SurfaceFormat.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,49 +23,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_TEXTURE_HPP_INCLUDED
-#define LITHIUM_TEXTURE_HPP_INCLUDED
-
-#include <Lithium/Graphics/GraphicsResource.hpp>
-#include <Lithium/Graphics/SurfaceFormat.hpp>
+#ifndef LITHIUM_SURFACE_FORMAT_HPP_INCLUDED
+#define LITHIUM_SURFACE_FORMAT_HPP_INCLUDED
 
 namespace Lithium
 {
-	class Texture : public GraphicsResource
+	/**
+	 * Defines various types of surface formats.
+	 *
+	 * \author Don Olmstead
+	 * \version 0.1
+	 */
+	namespace SurfaceFormat
 	{
-		protected:
-
+		/// An enumerated type
+		enum Enum
+		{
 			/**
-			 * Creates an instance of the Texture class.
-			 *
-			 * \param format The format of the texture data
+			 * 32-bit ARGB pixel format with alpha, using 8 bits per channel.
 			 */
-			Texture(SurfaceFormat::Enum format);
+			Color,
+			/// The number of enumerations
+			Size
 
-			/**
-			 * Destroys an instance of the Texture class.
-			 */
-			~Texture();
+		} ; // end enum Enum
 
-		public:
-
-			/**
-			 * Gets the format of the texture data.
-			 *
-			 * \returns The format of the texture data.
-			 */
-			inline SurfaceFormat::Enum getSurfaceFormat() const
-			{
-				return _surfaceFormat;
-			}
-
-		private:
-
-			/// The format of the texture data
-			SurfaceFormat::Enum _surfaceFormat;
-
-	} ; // end class Texture
+	} // end namespace SurfaceFormat
 
 } // end namespace Lithium
 
-#endif // end LITHIUM_TEXTURE_HPP_INCLUDED
+#endif // end LITHIUM_SURFACE_FORMAT_HPP_INCLUDED
