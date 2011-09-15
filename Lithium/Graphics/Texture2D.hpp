@@ -27,6 +27,7 @@
 #define LITHIUM_TEXTURE_2D_HPP_INCLUDED
 
 #include <Lithium/Graphics/Texture.hpp>
+#include <Lithium/Graphics/BufferUsage.hpp>
 
 namespace Lithium
 {
@@ -41,8 +42,9 @@ namespace Lithium
 			 * \param width The width of the texture.
 			 * \param height The height of the texture.
 			 * \param data The texture data.
+			 * \param bufferUsage Description of how the buffer will be used.
 			 */
-			Texture2D(GraphicsDevice* device, std::int32_t width, std::int32_t height, const void* data = 0);
+			Texture2D(GraphicsDevice* device, std::int32_t width, std::int32_t height, const void* data = 0, BufferUsage::Enum bufferUsage = BufferUsage::Dynamic);
 
 		//----------------------------------------------------------------------
 		// Properties

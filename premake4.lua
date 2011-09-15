@@ -24,7 +24,14 @@ solution "Lithium"
 		libdirs
 		{
 			"$(RTLPATH)/build/release"
-		}	
+		}
+
+	configuration "vs*"
+		defines
+		{
+			"LITHIUM_USE_PRECOMPILED_HEADERS",
+			"_CRT_SECURE_NO_WARNINGS"
+		}
 
 	-- Core project
 	project "Lithium.Core"
@@ -61,9 +68,7 @@ solution "Lithium"
 
 			-- Source Files
 			"Libs/Graphics/Src/*.cpp",
-			"Libs/Graphics/Src/*.hpp",
-			"Libs/Graphics/Src/*.c",
-			"Libs/Graphics/Src/*.h"
+			"Libs/Graphics/Src/*.hpp"
 		}
 		links
 		{
@@ -107,7 +112,9 @@ solution "Lithium"
 
 			-- Source files
 			"Libs/Content/Src/*.cpp",
-			"Libs/Content/Src/*.hpp"
+			"Libs/Content/Src/*.hpp",
+			"Libs/Content/Src/*.c",
+			"Libs/Content/Src/*.h"
 		}
 		links
 		{

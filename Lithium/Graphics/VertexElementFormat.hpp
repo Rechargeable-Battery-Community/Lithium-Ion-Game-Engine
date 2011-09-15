@@ -1,5 +1,5 @@
 /**
- * \file Texture2D.cpp
+ * \file VertexElementFormat.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,19 +23,37 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Lithium/Graphics/Texture2D.hpp>
-#include <Lithium/Graphics/GraphicsDevice.hpp>
-using namespace Lithium;
+#ifndef LITHIUM_VERTEX_ELEMENT_FORMAT_HPP_INCLUDED
+#define LITHIUM_VERTEX_ELEMENT_FORMAT_HPP_INCLUDED
 
-//---------------------------------------------------------------------
-
-Texture2D::Texture2D(GraphicsDevice* device, std::int32_t width, std::int32_t height, const void* data, BufferUsage::Enum bufferUsage)
-: Texture(SurfaceFormat::Color)
-, _width(width)
-, _height(height)
+namespace Lithium
 {
-	device->bindTexture2D(this, data, bufferUsage);
-}
+	/**
+	 * Defines vertex element formats.
+	 *
+	 * \author Don Olmstead
+	 * \version 0.1
+	 */
+	namespace VertexElementFormat
+	{
+		/// An enumerated type
+		enum Enum
+		{
+			/// Single-component, 32-bit floating-point element
+			Scalar,
+			/// Two-component, 32-bit floating-point, element
+			Vector2,
+			/// Three-component, 32-bit floating point, element
+			Vector3,
+			/// Four-component, 32-bit floating point, element
+			Vector4,
+			/// The number of enumerations
+			Size
 
-//---------------------------------------------------------------------
+		} ; // end enum Enum
 
+	} // end namespace VertexElementFormat
+
+} // end namespace Lithium
+
+#endif // end LITHIUM_VERTEX_ELEMENT_FORMAT_HPP_INCLUDED

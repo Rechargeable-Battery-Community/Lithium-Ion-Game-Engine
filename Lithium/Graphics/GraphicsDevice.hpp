@@ -153,7 +153,7 @@ namespace Lithium
 			void createEffectPass(EffectPass* effect);
 			void destroyEffectPass(EffectPass* effect);
 
-			void bindTexture2D(Texture2D* texture, const void* data);
+			void bindTexture2D(Texture2D* texture, const void* data, BufferUsage::Enum bufferUsage);
 			void releaseTexture2D(Texture2D* texture);
 
 			Viewport _viewport;

@@ -47,35 +47,20 @@ namespace
 		GL_UNSIGNED_BYTE // Color
 	} ;
 
-	GLenum getError()
-	{
-		GLenum error = glGetError();
-
-		switch (error)
-		{
-			case GL_INVALID_ENUM     : printf("GL_INVALID_ENUM");      break;
-			case GL_INVALID_VALUE    : printf("GL_INVALID_VALUE");     break;
-			case GL_INVALID_OPERATION: printf("GL_INVALID_OPERATION"); break;
-			case GL_STACK_OVERFLOW   : printf("GL_STACK_OVERFLOW");    break;
-			case GL_STACK_UNDERFLOW  : printf("GL_STACK_UNDERFLOW");   break;
-			case GL_OUT_OF_MEMORY    : printf("GL_OUT_OF_MEMORY");     break;
-			case GL_TABLE_TOO_LARGE  : printf("GL_TABLE_TOO_LARGE");   break;
-		} ;
-
-		return error;
-	}
-
 } // end anonymous namespace
 
 //---------------------------------------------------------------------
 
-void GraphicsDevice::bindTexture2D(Texture2D* texture, const void* data)
+void GraphicsDevice::bindTexture2D(Texture2D* texture, const void* data, BufferUsage::Enum bufferUsage)
 {
-	GLuint id;
+	std::int32_t size = texture->getWidth() * texture->getHeight() * 4;
 
+	GLuint id;
+	GLuint buffer;
+
+	// Create the texture
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
-	SurfaceFormat::Enum format = texture->getSurfaceFormat();
 
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); 
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -83,20 +68,60 @@ void GraphicsDevice::bindTexture2D(Texture2D* texture, const void* data)
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
 
-	glTexImage2D(
-		GL_TEXTURE_2D,
-		0,
-		__surfaceFormatInternal[format],
-		texture->getWidth(),
-		texture->getHeight(),
-		0,
-		__surfaceFormat[format],
-		__surfaceFormatType[format],
-		data
-	);
+	SurfaceFormat::Enum format = texture->getSurfaceFormat();
+
+	if (bufferUsage == BufferUsage::Static)
+	{
+		// Copy the data into the texture
+		glTexImage2D(
+			GL_TEXTURE_2D,                   // Target
+			0,                               // Level
+			__surfaceFormatInternal[format], // Internal format (color components)
+			texture->getWidth(),             // Width
+			texture->getHeight(),            // Height
+			0,                               // Border
+			__surfaceFormat[format],         // Surface format (format of the pixel data)
+			__surfaceFormatType[format],     // Surface format type (data-type of pixel data)
+			data                             // Data
+		);
+
+		// Pixel buffer is unused
+		buffer = 0;
+	}
+	else
+	{
+		// Create the PBO
+		glGenBuffers(1, &buffer);
+		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, buffer);
+
+		// Copy the data into the texture
+		// If data is null then the space is just reserved
+		glBufferData(GL_PIXEL_PACK_BUFFER, size, data, GL_DYNAMIC_DRAW);
+
+		glTexImage2D(
+			GL_TEXTURE_2D,                   // Target
+			0,                               // Level
+			__surfaceFormatInternal[format], // Internal format (color components)
+			texture->getWidth(),             // Width
+			texture->getHeight(),            // Height
+			0,                               // Border
+			__surfaceFormat[format],         // Surface format (format of the pixel data)
+			__surfaceFormatType[format],     // Surface format type (data-type of pixel data)
+			0                                // Data
+		);
+
+		// Unbind the PBO
+		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+
+	}
+
+	// Unbind the texture
+	glBindTexture(GL_TEXTURE_2D, 0);
 	
+	// Create the binding
 	TextureBinding* binding = new TextureBinding();
 	binding->id = id;
+	binding->buffer = buffer;
 
 	texture->setDevice(this, binding);
 }

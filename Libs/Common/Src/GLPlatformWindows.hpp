@@ -36,6 +36,19 @@ extern PFNGLBLENDEQUATIONSEPARATEPROC glBlendEquationSeparate;
 extern PFNGLBLENDFUNCSEPARATEPROC glBlendFuncSeparate;
 
 //----------------------------------------------------------------------
+// Buffer functions
+//----------------------------------------------------------------------
+
+extern PFNGLGENBUFFERSPROC glGenBuffers;
+extern PFNGLDELETEBUFFERSPROC glDeleteBuffers;
+extern PFNGLBINDBUFFERPROC glBindBuffer;
+extern PFNGLBUFFERDATAPROC glBufferData;
+extern PFNGLBUFFERSUBDATAPROC glBufferSubData;
+extern PFNGLDELETEBUFFERSPROC glDeleteBuffers;
+extern PFNGLMAPBUFFERPROC glMapBuffer;
+extern PFNGLUNMAPBUFFERPROC glUnmapBuffer;
+
+//----------------------------------------------------------------------
 // Shader functions
 //----------------------------------------------------------------------
 

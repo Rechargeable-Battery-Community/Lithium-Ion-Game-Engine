@@ -1,5 +1,5 @@
 /**
- * \file TextureBinding.hpp
+ * \file BufferUsage.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,32 +23,47 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_TEXTURE_BINDING_HPP_INCLUDED
-#define LITHIUM_TEXTURE_BINDING_HPP_INCLUDED
-
-#include "GLPlatform.hpp"
+#ifndef LITHIUM_BUFFER_USAGE_HPP_INCLUDED
+#define LITHIUM_BUFFER_USAGE_HPP_INCLUDED
 
 namespace Lithium
 {
 	/**
-	 * Represents the binding of a Texture to OpenGL.
+	 * Defines the expected usage of a buffer.
 	 *
 	 * \author Don Olmstead
 	 * \version 0.1
 	 */
-	struct TextureBinding
+	namespace BufferUsage
 	{
-		/// The identifier for the texture
-		GLuint id;
-		/**
-		 * Identifier for the pixel buffer object.
-		 *
-		 * Used when streaming to and from the texture. This is
-		 * not present if the buffer usage is static.
-		 */
-		GLuint buffer;
-	} ;
+		/// An enumerated type
+		enum Enum
+		{
+			/**
+			 * Contents of the buffer will not change.
+			 *
+			 * Reading and writing the contents is disabled.
+			 */
+			Static,
+			/**
+			 * Contents of the buffer will change.
+			 *
+			 * The buffer can be read and written to.
+			 */
+			Dynamic,
+			/**
+			 * Contents of the buffer will change frequently.
+			 *
+			 * The buffer will be written to each time it is accessed.
+			 */
+			Stream,
+			/// The number of enumerations
+			Size
+
+		} ; // end enum Enum
+
+	} // end namespace BufferUsage
 
 } // end namespace Lithium
 
-#endif // end LITHIUM_TEXTURE_BINDING_HPP_INCLUDED
+#endif // end LITHIUM_BUFFER_USAGE_HPP_INCLUDED

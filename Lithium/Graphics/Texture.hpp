@@ -38,7 +38,7 @@ namespace Lithium
 			/**
 			 * Creates an instance of the Texture class.
 			 *
-			 * \param format The format of the texture data
+			 * \param format The format of the texture data.
 			 */
 			Texture(SurfaceFormat::Enum format);
 

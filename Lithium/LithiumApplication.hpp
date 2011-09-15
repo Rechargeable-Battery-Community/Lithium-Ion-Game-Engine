@@ -30,7 +30,7 @@
 // Application
 //----------------------------------------------------------------------
 
-#include <Lithium/Application/DeviceOrientation>
+#include <Lithium/Application/DeviceOrientation.hpp>
 #include <Lithium/Application/Game.hpp>
 #include <Lithium/Application/GameWindow.hpp>
 

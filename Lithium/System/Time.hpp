@@ -34,7 +34,7 @@ namespace Lithium
 	// Forward declaration
 	class Game;
 
-	class Time
+	class LITHIUM_CORE_ITEM Time
 	{
 		public:
 

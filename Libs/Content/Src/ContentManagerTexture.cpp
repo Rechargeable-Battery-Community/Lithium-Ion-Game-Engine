@@ -43,7 +43,7 @@ Texture2D* ContentManager::loadTexture2D(const std::string& path)
 		std::int32_t width, height, bytesPerPixel;
 		std::uint8_t* imageData = stbi_load(path.c_str(), &width, &height, &bytesPerPixel, 4);
 
-		texture = new Texture2D(_gameServiceLocator.getGraphicsDevice(), width, height, imageData);
+		texture = new Texture2D(_gameServiceLocator.getGraphicsDevice(), width, height, imageData, BufferUsage::Static);
 
 		_loadedTexture2Ds[path] = texture;
 	}
