@@ -96,7 +96,7 @@ void GraphicsDevice::bindTexture2D(Texture2D* texture, const void* data, BufferU
 
 		// Copy the data into the texture
 		// If data is null then the space is just reserved
-		glBufferData(GL_PIXEL_PACK_BUFFER, size, data, GL_DYNAMIC_DRAW);
+		glBufferData(GL_PIXEL_UNPACK_BUFFER, size, data, GL_DYNAMIC_DRAW);
 
 		glTexImage2D(
 			GL_TEXTURE_2D,                   // Target
