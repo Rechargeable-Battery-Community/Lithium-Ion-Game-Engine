@@ -112,7 +112,6 @@ void GraphicsDevice::bindTexture2D(Texture2D* texture, const void* data, BufferU
 
 		// Unbind the PBO
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
-
 	}
 
 	// Unbind the texture

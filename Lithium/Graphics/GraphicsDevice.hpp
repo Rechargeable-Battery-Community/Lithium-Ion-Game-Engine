@@ -34,6 +34,7 @@
 #include <Lithium/Graphics/Viewport.hpp>
 #include <Lithium/Graphics/GraphicsDeviceContext.hpp>
 #include <Lithium/Graphics/Texture2D.hpp>
+#include <Lithium/Graphics/VertexBuffer.hpp>
 
 namespace Lithium
 {
@@ -153,8 +154,25 @@ namespace Lithium
 			void createEffectPass(EffectPass* effect);
 			void destroyEffectPass(EffectPass* effect);
 
+		//----------------------------------------------------------------------
+		// VertexBuffer methods
+		//----------------------------------------------------------------------
+
+		private:
+
+			friend class VertexBuffer;
+
+			void bindVertexBuffer(VertexBuffer* buffer, const void* data, BufferUsage::Enum bufferUsage);
+
+		//----------------------------------------------------------------------
+		// Texture methods
+		//----------------------------------------------------------------------
+
+		private:
+
 			void bindTexture2D(Texture2D* texture, const void* data, BufferUsage::Enum bufferUsage);
 			void releaseTexture2D(Texture2D* texture);
+			void setDataTexture2D(Texture2D* texture, const void* data, std::int32_t x, std::int32_t y, std::int32_t width, std::int32_t height);
 
 			Viewport _viewport;
 

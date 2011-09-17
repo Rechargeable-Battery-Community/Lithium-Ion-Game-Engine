@@ -1,5 +1,5 @@
 /**
- * \file GameServiceLocator.cpp
+ * \file OpenGL3VertexBuffer.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,11 +23,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Lithium/Content/GameServiceLocator.hpp>
+#include <Lithium/Graphics/GraphicsDevice.hpp>
 using namespace Lithium;
 
 //---------------------------------------------------------------------
 
-GameServiceLocator::GameServiceLocator()
-: _graphicsDevice(0)
-{ }
+void GraphicsDevice::bindVertexBuffer(VertexBuffer* buffer, const void* data, BufferUsage::Enum bufferUsage)
+{
+	int i = 0;
+}

@@ -1,5 +1,5 @@
 /**
- * \file GameServiceLocator.cpp
+ * \file VertexPositionTexture.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,11 +23,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Lithium/Content/GameServiceLocator.hpp>
+#include <Lithium/VertexDefinitions/VertexPositionTexture.hpp>
 using namespace Lithium;
+
+namespace
+{
+	/// Vertex declaration for VertexPositionTexture
+	VertexDeclaration __vertexDeclaration;
+}
 
 //---------------------------------------------------------------------
 
-GameServiceLocator::GameServiceLocator()
-: _graphicsDevice(0)
-{ }
+const VertexDeclaration& VertexPositionTexture::getVertexDeclaration()
+{
+	std::vector<VertexElement>& elements = __vertexDeclaration.getElements();
+
+	if (elements.size() == 0)
+	{
+		elements.push_back(VertexElement(0, VertexElementFormat::Vector3));
+		elements.push_back(VertexElement(sizeof(Vector3f), VertexElementFormat::Vector2));
+	}
+
+	return __vertexDeclaration;
+}

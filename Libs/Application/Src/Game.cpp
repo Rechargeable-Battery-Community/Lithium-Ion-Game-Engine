@@ -35,6 +35,8 @@
 #include <Lithium/Input/GamePad.hpp>
 
 #include <Lithium/Graphics/EffectPass.hpp>
+#include <Lithium/Graphics/VertexBuffer.hpp>
+#include <Lithium/VertexDefinitions/VertexPositionTexture.hpp>
 #include "GLPlatform.hpp"
 using namespace Lithium;
 
@@ -51,6 +53,7 @@ BlendState* __blendState;
 DepthStencilState* __depthStencilState;
 RasterizerState* __rasterizerState;
 Texture2D* __texture;
+VertexBuffer* __vertexBuffer;
 
 //---------------------------------------------------------------------
 
@@ -101,6 +104,19 @@ void Game::initialize()
 
 	__rasterizerState = new RasterizerState();
 	_graphicsDevice->bind(__rasterizerState);
+
+	VertexPositionTexture vertices[4];
+	vertices[0].position.set_values(-1.0f,  1.0f, 0.0f);
+	vertices[1].position.set_values( 1.0f,  1.0f, 0.0f);
+	vertices[2].position.set_values( 1.0f, -1.0f, 0.0f);
+	vertices[3].position.set_values(-1.0f, -1.0f, 0.0f);
+
+	vertices[0].textureCoordinate.set_values(0.0f, 0.0f);
+	vertices[1].textureCoordinate.set_values(1.0f, 0.0f);
+	vertices[2].textureCoordinate.set_values(1.0f, 1.0f);
+	vertices[3].textureCoordinate.set_values(0.0f, 1.0f);
+
+	__vertexBuffer = new VertexBuffer(_graphicsDevice, vertices, 4);
 	/*
 	__vertexShader = new VertexShader();
 	__pixelShader = new PixelShader();

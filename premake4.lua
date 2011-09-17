@@ -65,6 +65,7 @@ solution "Lithium"
 			"Lithium/LithiumGraphics.hpp",
 			"Lithium/LithiumGraphicsLIB.hpp",
 			"Lithium/Graphics/*.hpp",
+			"Lithium/VertexDefinitions/*.hpp",
 
 			-- Source Files
 			"Libs/Graphics/Src/*.cpp",

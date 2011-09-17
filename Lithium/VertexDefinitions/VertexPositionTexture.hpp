@@ -1,5 +1,5 @@
 /**
- * \file IndexBuffer.hpp
+ * \file VertexPositionTexture.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,28 +23,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_INDEX_BUFFER_HPP_INCLUDED
-#define LITHIUM_INDEX_BUFFER_HPP_INCLUDED
+#ifndef LITHIUM_VERTEX_POSITION_TEXTURE_HPP_INCLUDED
+#define LITHIUM_VERTEX_POSITION_TEXTURE_HPP_INCLUDED
 
-#include <Lithium/Graphics/GraphicsResource.hpp>
+#include <Lithium/Graphics/VertexDeclaration.hpp>
+#include <Lithium/Mathematics/Vector.hpp>
 
 namespace Lithium
 {
-	class IndexBuffer : public GraphicsResource
+	/**
+	 * Describes a vertex format that contains position and one set of texture coordinates.
+	 *
+	 * \author Don Olmstead
+	 * \version 0.1
+	 */
+	struct VertexPositionTexture
 	{
-		//----------------------------------------------------------------------
-		// Construction
-		//----------------------------------------------------------------------
+		/// The position
+		Vector3f position;
+		/// The texture coordinate
+		Vector2f textureCoordinate;
 
-		public:
+		/**
+		 * Gets the vertex declaration, which defines per-vertex data.
+		 *
+		 * \returns The vertex declaration, which defines per-vertex data.
+		 */
+		static const VertexDeclaration& getVertexDeclaration();
 
-			/**
-			 * Initializes an instance of the IndexBuffer class.
-			 */
-			IndexBuffer(GraphicsDevice* device);
-
-	} ; // end class IndexBuffer
+	} ; // end struct VertexPositionTexture
 
 } // end namespace Lithium
 
-#endif // end LITHIUM_INDEX_BUFFER_HPP_INCLUDED
+#endif // end LITHIUM_VERTEX_POSITION_TEXTURE_HPP_INCLUDED

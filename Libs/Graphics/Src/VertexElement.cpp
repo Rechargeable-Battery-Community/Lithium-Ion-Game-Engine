@@ -1,5 +1,5 @@
 /**
- * \file GameServiceLocator.cpp
+ * \file VertexElement.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,11 +23,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Lithium/Content/GameServiceLocator.hpp>
+#include <Lithium/Graphics/VertexElement.hpp>
 using namespace Lithium;
 
 //---------------------------------------------------------------------
 
-GameServiceLocator::GameServiceLocator()
-: _graphicsDevice(0)
+VertexElement::VertexElement()
+: _offset(0)
+, _format(VertexElementFormat::Vector4)
+{ }
+
+//---------------------------------------------------------------------
+
+VertexElement::VertexElement(std::int32_t offset, VertexElementFormat::Enum format)
+: _offset(offset)
+, _format(format)
 { }

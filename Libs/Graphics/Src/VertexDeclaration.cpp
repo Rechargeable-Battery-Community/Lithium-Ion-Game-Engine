@@ -1,5 +1,5 @@
 /**
- * \file GameServiceLocator.cpp
+ * \file VertexDeclaration.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,11 +23,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Lithium/Content/GameServiceLocator.hpp>
+#include <Lithium/Graphics/VertexDeclaration.hpp>
 using namespace Lithium;
 
 //---------------------------------------------------------------------
 
-GameServiceLocator::GameServiceLocator()
-: _graphicsDevice(0)
+VertexDeclaration::VertexDeclaration()
 { }

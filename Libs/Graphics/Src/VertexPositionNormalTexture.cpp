@@ -1,5 +1,5 @@
 /**
- * \file GameServiceLocator.cpp
+ * \file VertexPositionNormalTexture.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,11 +23,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Lithium/Content/GameServiceLocator.hpp>
+#include <Lithium/VertexDefinitions/VertexPositionNormalTexture.hpp>
 using namespace Lithium;
+
+namespace
+{
+	/// Vertex declaration for VertexPositionTexture
+	VertexDeclaration __vertexDeclaration;
+}
 
 //---------------------------------------------------------------------
 
-GameServiceLocator::GameServiceLocator()
-: _graphicsDevice(0)
-{ }
+const VertexDeclaration& VertexPositionNormalTexture::getVertexDeclaration()
+{
+	std::vector<VertexElement>& elements = __vertexDeclaration.getElements();
+
+	if (elements.size() == 0)
+	{
+		std::size_t vector3fSize = sizeof(Vector3f);
+
+		elements.push_back(VertexElement(0, VertexElementFormat::Vector3));
+		elements.push_back(VertexElement(vector3fSize, VertexElementFormat::Vector3));
+		elements.push_back(VertexElement(2 * vector3fSize, VertexElementFormat::Vector2));
+	}
+
+	return __vertexDeclaration;
+}
