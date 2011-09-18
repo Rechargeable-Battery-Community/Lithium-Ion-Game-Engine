@@ -1,5 +1,5 @@
 /**
- * \file OpenGL3VertexBuffer.cpp
+ * \file IndexBuffer.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,52 +23,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <Lithium/Graphics/IndexBuffer.hpp>
 #include <Lithium/Graphics/GraphicsDevice.hpp>
-#include <Lithium/Graphics/VertexBuffer.hpp>
-#include "VertexBufferBinding.hpp"
 using namespace Lithium;
-
-namespace
-{
-	/// Mapping values to OpenGL
-	GLenum __bufferUsage[BufferUsage::Size] =
-	{
-		GL_STATIC_DRAW,  // Static
-		GL_DYNAMIC_DRAW, // Dynamic
-		GL_STREAM_DRAW   // Stream
-	} ;
-
-} // end anonymous namespace
 
 //---------------------------------------------------------------------
 
-void GraphicsDevice::bindVertexBuffer(VertexBuffer* buffer, const void* data, std::size_t vertexSize)
+IndexBuffer::IndexBuffer(
+	GraphicsDevice* device,
+	const std::uint16_t* data,
+	std::size_t indexCount,
+	BufferUsage::Enum bufferUsage
+)
+: _indexCount(indexCount)
+, _indexElementSize(IndexElementSize::SixteenBits)
+, _bufferUsage(bufferUsage)
 {
-	GLuint id;
-
-	// Create the vertex buffer
-	glGenBuffers(1, &id);
-	glBindBuffer(GL_ARRAY_BUFFER, id);
-
-	glBufferData(GL_ARRAY_BUFFER, vertexSize * buffer->getVertexCount(), data, __bufferUsage[buffer->getBufferUsage()]);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	// Create the binding
-	VertexBufferBinding* binding = new VertexBufferBinding();
-	binding->id = id;
+	device->bindIndexBuffer(this, (const void*)data, sizeof(std::uint16_t));
 }
 
 //---------------------------------------------------------------------
 
-void GraphicsDevice::releaseVertexBuffer(VertexBuffer* buffer)
+IndexBuffer::IndexBuffer(
+	GraphicsDevice* device,
+	const std::uint32_t* data,
+	std::size_t indexCount,
+	BufferUsage::Enum bufferUsage
+)
+: _indexCount(indexCount)
+, _indexElementSize(IndexElementSize::ThirtyTwoBits)
+, _bufferUsage(bufferUsage)
 {
-	VertexBufferBinding* binding = (VertexBufferBinding*)buffer->getResources();
-
-	glDeleteBuffers(1, &binding->id);
-
-	// Remove the binding
-	delete binding;
-
-	buffer->setDevice(0, 0);
+	device->bindIndexBuffer(this, (const void*)data, sizeof(std::uint32_t));
 }

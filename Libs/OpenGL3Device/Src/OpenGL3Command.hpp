@@ -31,6 +31,8 @@
 #include "RasterizerStateBinding.hpp"
 #include "TextureBinding.hpp"
 #include "SamplerStateBinding.hpp"
+#include "VertexBufferBinding.hpp"
+#include "IndexBufferBinding.hpp"
 
 namespace Lithium
 {
@@ -58,6 +60,8 @@ namespace Lithium
 
 		const TextureBinding* texture;
 		const SamplerStateBinding* samplerState;
+		const VertexBufferBinding* vertexBuffer;
+		const IndexBufferBinding* indexBuffer;
 	} ;
 
 	/**

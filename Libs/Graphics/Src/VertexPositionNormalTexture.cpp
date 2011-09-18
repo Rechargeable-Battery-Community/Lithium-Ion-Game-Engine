@@ -40,11 +40,12 @@ const VertexDeclaration& VertexPositionNormalTexture::getVertexDeclaration()
 
 	if (elements.size() == 0)
 	{
-		std::size_t vector3fSize = sizeof(Vector3f);
-
-		elements.push_back(VertexElement(0, VertexElementFormat::Vector3));
-		elements.push_back(VertexElement(vector3fSize, VertexElementFormat::Vector3));
-		elements.push_back(VertexElement(2 * vector3fSize, VertexElementFormat::Vector2));
+		std::int32_t offset = 0;
+		elements.push_back(VertexElement(offset, VertexElementFormat::Vector3, VertexElementUsage::Position));
+		offset += sizeof(Vector3f);
+		elements.push_back(VertexElement(offset, VertexElementFormat::Vector3, VertexElementUsage::Normal));
+		offset += sizeof(Vector3f);
+		elements.push_back(VertexElement(offset, VertexElementFormat::Vector2, VertexElementUsage::TextureCoordinate));
 	}
 
 	return __vertexDeclaration;

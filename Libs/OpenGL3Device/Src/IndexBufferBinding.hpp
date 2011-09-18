@@ -1,5 +1,5 @@
 /**
- * \file VertexPositionTexture.cpp
+ * \file IndexBufferBinding.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,28 +23,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Lithium/VertexDefinitions/VertexPositionTexture.hpp>
-using namespace Lithium;
+#ifndef LITHIUM_INDEX_BUFFER_BINDING_HPP_INCLUDED
+#define LITHIUM_INDEX_BUFFER_BINDING_HPP_INCLUDED
 
-namespace
+#include "GLPlatform.hpp"
+
+namespace Lithium
 {
-	/// Vertex declaration for VertexPositionTexture
-	VertexDeclaration __vertexDeclaration;
-}
-
-//---------------------------------------------------------------------
-
-const VertexDeclaration& VertexPositionTexture::getVertexDeclaration()
-{
-	std::vector<VertexElement>& elements = __vertexDeclaration.getElements();
-
-	if (elements.size() == 0)
+	/**
+	 * Represents the binding of an IndexBuffer to OpenGL.
+	 *
+	 * \author Don Olmstead
+	 * \version 0.1
+	 */
+	struct IndexBufferBinding
 	{
-		std::int32_t offset = 0;
-		elements.push_back(VertexElement(offset, VertexElementFormat::Vector3, VertexElementUsage::Position));
-		offset += sizeof(Vector3f);
-		elements.push_back(VertexElement(offset, VertexElementFormat::Vector2, VertexElementUsage::TextureCoordinate));
-	}
+		GLuint id;
 
-	return __vertexDeclaration;
-}
+	} ; // end struct IndexBufferBinding
+
+} // end namespace Lithium
+
+#endif // end LITHIUM_INDEX_BUFFER_BINDING_HPP_INCLUDED

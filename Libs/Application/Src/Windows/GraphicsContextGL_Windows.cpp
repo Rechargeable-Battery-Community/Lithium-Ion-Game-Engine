@@ -159,6 +159,7 @@ void GraphicsAPI::initialize()
 	glEnableVertexAttribArray = (PFNGLENABLEVERTEXATTRIBARRAYPROC)wglGetProcAddress("glEnableVertexAttribArray");
 	glBindAttribLocation = (PFNGLBINDATTRIBLOCATIONPROC)wglGetProcAddress("glBindAttribLocation");
 
+
 	//----------------------------------------------------------------------
 	// Set global state
 	//----------------------------------------------------------------------

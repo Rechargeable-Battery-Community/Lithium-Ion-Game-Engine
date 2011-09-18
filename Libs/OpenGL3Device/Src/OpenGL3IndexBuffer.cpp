@@ -1,5 +1,5 @@
 /**
- * \file OpenGL3VertexBuffer.cpp
+ * \file OpenGL3IndexBuffer.cpp
  *
  * \section COPYRIGHT
  *
@@ -24,12 +24,18 @@
  */
 
 #include <Lithium/Graphics/GraphicsDevice.hpp>
-#include <Lithium/Graphics/VertexBuffer.hpp>
-#include "VertexBufferBinding.hpp"
+#include "IndexBufferBinding.hpp"
 using namespace Lithium;
 
 namespace
 {
+	/// Mapping values to OpenGL
+	GLenum __indexElementSizeType[IndexElementSize::Size] =
+	{
+		GL_UNSIGNED_SHORT, // SixteenBits
+		GL_UNSIGNED_INT    // ThirtyTwoBits
+	} ;
+
 	/// Mapping values to OpenGL
 	GLenum __bufferUsage[BufferUsage::Size] =
 	{
@@ -42,28 +48,28 @@ namespace
 
 //---------------------------------------------------------------------
 
-void GraphicsDevice::bindVertexBuffer(VertexBuffer* buffer, const void* data, std::size_t vertexSize)
+void GraphicsDevice::bindIndexBuffer(IndexBuffer* buffer, const void* data, std::size_t indexSize)
 {
 	GLuint id;
 
-	// Create the vertex buffer
+	// Create the index buffer
 	glGenBuffers(1, &id);
-	glBindBuffer(GL_ARRAY_BUFFER, id);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
 
-	glBufferData(GL_ARRAY_BUFFER, vertexSize * buffer->getVertexCount(), data, __bufferUsage[buffer->getBufferUsage()]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexSize * buffer->getIndexCount(), data, __bufferUsage[buffer->getBufferUsage()]);
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	// Create the binding
-	VertexBufferBinding* binding = new VertexBufferBinding();
+	IndexBufferBinding* binding = new IndexBufferBinding();
 	binding->id = id;
 }
 
 //---------------------------------------------------------------------
 
-void GraphicsDevice::releaseVertexBuffer(VertexBuffer* buffer)
+void GraphicsDevice::releaseIndexBuffer(IndexBuffer* buffer)
 {
-	VertexBufferBinding* binding = (VertexBufferBinding*)buffer->getResources();
+	IndexBufferBinding* binding = (IndexBufferBinding*)buffer->getResources();
 
 	glDeleteBuffers(1, &binding->id);
 

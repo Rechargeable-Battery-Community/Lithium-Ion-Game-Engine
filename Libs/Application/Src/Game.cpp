@@ -36,6 +36,7 @@
 
 #include <Lithium/Graphics/EffectPass.hpp>
 #include <Lithium/Graphics/VertexBuffer.hpp>
+#include <Lithium/Graphics/IndexBuffer.hpp>
 #include <Lithium/VertexDefinitions/VertexPositionTexture.hpp>
 #include "GLPlatform.hpp"
 using namespace Lithium;
@@ -54,6 +55,7 @@ DepthStencilState* __depthStencilState;
 RasterizerState* __rasterizerState;
 Texture2D* __texture;
 VertexBuffer* __vertexBuffer;
+IndexBuffer* __indexBuffer;
 
 //---------------------------------------------------------------------
 
@@ -117,6 +119,14 @@ void Game::initialize()
 	vertices[3].textureCoordinate.set_values(0.0f, 1.0f);
 
 	__vertexBuffer = new VertexBuffer(_graphicsDevice, vertices, 4);
+
+	std::uint16_t indices[4];
+	indices[0] = 0;
+	indices[1] = 1;
+	indices[2] = 2;
+	indices[3] = 3;
+
+	__indexBuffer = new IndexBuffer(_graphicsDevice, indices, 4);
 	/*
 	__vertexShader = new VertexShader();
 	__pixelShader = new PixelShader();

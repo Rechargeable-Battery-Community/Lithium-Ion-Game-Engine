@@ -35,6 +35,7 @@
 #include <Lithium/Graphics/GraphicsDeviceContext.hpp>
 #include <Lithium/Graphics/Texture2D.hpp>
 #include <Lithium/Graphics/VertexBuffer.hpp>
+#include <Lithium/Graphics/IndexBuffer.hpp>
 
 namespace Lithium
 {
@@ -162,7 +163,19 @@ namespace Lithium
 
 			friend class VertexBuffer;
 
-			void bindVertexBuffer(VertexBuffer* buffer, const void* data, BufferUsage::Enum bufferUsage);
+			void bindVertexBuffer(VertexBuffer* buffer, const void* data, std::size_t vertexSize);
+			void releaseVertexBuffer(VertexBuffer* buffer);
+
+		//----------------------------------------------------------------------
+		// IndexBuffer methods
+		//----------------------------------------------------------------------
+
+		private:
+
+			friend class IndexBuffer;
+
+			void bindIndexBuffer(IndexBuffer* buffer, const void* data, std::size_t indexSize);
+			void releaseIndexBuffer(IndexBuffer* buffer);
 
 		//----------------------------------------------------------------------
 		// Texture methods

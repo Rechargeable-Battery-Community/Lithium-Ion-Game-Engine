@@ -1,5 +1,5 @@
 /**
- * \file VertexPositionTexture.cpp
+ * \file VertexElementUsage.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,28 +23,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Lithium/VertexDefinitions/VertexPositionTexture.hpp>
-using namespace Lithium;
+#ifndef LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED
+#define LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED
 
-namespace
+namespace Lithium
 {
-	/// Vertex declaration for VertexPositionTexture
-	VertexDeclaration __vertexDeclaration;
-}
-
-//---------------------------------------------------------------------
-
-const VertexDeclaration& VertexPositionTexture::getVertexDeclaration()
-{
-	std::vector<VertexElement>& elements = __vertexDeclaration.getElements();
-
-	if (elements.size() == 0)
+	/**
+	 * Defines usage for vertex elements.
+	 *
+	 * \author Don Olmstead
+	 * \version 0.1
+	 */
+	namespace VertexElementUsage
 	{
-		std::int32_t offset = 0;
-		elements.push_back(VertexElement(offset, VertexElementFormat::Vector3, VertexElementUsage::Position));
-		offset += sizeof(Vector3f);
-		elements.push_back(VertexElement(offset, VertexElementFormat::Vector2, VertexElementUsage::TextureCoordinate));
-	}
+		/// An enumerated type
+		enum Enum
+		{
+			/**
+			 * Position data.
+			 */
+			Position,
+			/**
+			 * Texture coordinate data.
+			 */
+			TextureCoordinate,
+			/**
+			 * Vertex normal data.
+			 */
+			Normal,
 
-	return __vertexDeclaration;
-}
+		} ; // end enum Enum
+
+	} // end namespace VertexElementUsage
+
+} // end namespace Lithium
+
+#endif // end LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED

@@ -1,5 +1,5 @@
 /**
- * \file VertexPositionTexture.cpp
+ * \file IndexElementSize.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,28 +23,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Lithium/VertexDefinitions/VertexPositionTexture.hpp>
-using namespace Lithium;
+#ifndef LITHIUM_INDEX_ELEMENT_SIZE_HPP_INCLUDED
+#define LITHIUM_INDEX_ELEMENT_SIZE_HPP_INCLUDED
 
-namespace
+namespace Lithium
 {
-	/// Vertex declaration for VertexPositionTexture
-	VertexDeclaration __vertexDeclaration;
-}
-
-//---------------------------------------------------------------------
-
-const VertexDeclaration& VertexPositionTexture::getVertexDeclaration()
-{
-	std::vector<VertexElement>& elements = __vertexDeclaration.getElements();
-
-	if (elements.size() == 0)
+	namespace IndexElementSize
 	{
-		std::int32_t offset = 0;
-		elements.push_back(VertexElement(offset, VertexElementFormat::Vector3, VertexElementUsage::Position));
-		offset += sizeof(Vector3f);
-		elements.push_back(VertexElement(offset, VertexElementFormat::Vector2, VertexElementUsage::TextureCoordinate));
-	}
+		/// An enumerated type
+		enum Enum
+		{
+			/// Sixteen bits (unsigned short type)
+			SixteenBits,
+			/// Thirty-two bits (unsigned int type)
+			ThirtyTwoBits,
+			/// The number of enumerations
+			Size
 
-	return __vertexDeclaration;
-}
+		} ; // end enum Enum
+
+	} // end namespace IndexElementSize
+
+} // end namespace Lithium
+
+#endif // end LITHIUM_INDEX_ELEMENT_SIZE_HPP_INCLUDED

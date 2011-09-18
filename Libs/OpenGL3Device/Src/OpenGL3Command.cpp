@@ -92,6 +92,14 @@ namespace
 		glBindTexture(GL_TEXTURE_2D, texture->id);
 	}
 
+	void setVertexBuffer(const VertexBufferBinding* buffer)
+	{		
+	}
+
+	void setIndexBuffer(const IndexBufferBinding* buffer)
+	{
+	}
+
 } // end anonymous namespace
 
 //---------------------------------------------------------------------
@@ -102,4 +110,7 @@ void Lithium::executeCommand(const GraphicsCommand& command)
 	setDepthStencilState(command.depthStencilState);
 	setRasterizerState(command.rasterizerState);
 	setTexture(command.texture);
+
+	setVertexBuffer(command.vertexBuffer);
+	setIndexBuffer(command.indexBuffer);
 }

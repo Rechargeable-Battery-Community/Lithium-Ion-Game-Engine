@@ -34,18 +34,29 @@ namespace Lithium
 	class VertexBuffer : public GraphicsResource
 	{
 		//----------------------------------------------------------------------
-		// Construction
+		// Construction/Destruction
 		//----------------------------------------------------------------------
 
 		public:
 
 			template <typename VertexType>
-			VertexBuffer(GraphicsDevice* device, const VertexType* data, std::int32_t vertexCount, BufferUsage::Enum bufferUsage = BufferUsage::Static)
+			VertexBuffer(
+				GraphicsDevice* device,
+				const VertexType* data,
+				std::int32_t vertexCount,
+				BufferUsage::Enum bufferUsage = BufferUsage::Static
+			)
 			: _vertexCount(vertexCount)
 			, _vertexDeclaration(VertexType::getVertexDeclaration())
+			, _bufferUsage(bufferUsage)
 			{
-				device->bindVertexBuffer(this, (const void*)data, bufferUsage);
+				device->bindVertexBuffer(this, (const void*)data, sizeof(VertexType));
 			}
+
+			/**
+			 * Destroys an instance of the VertexBuffer class.
+			 */
+			~VertexBuffer();
 
 		//----------------------------------------------------------------------
 		// Properties
@@ -73,6 +84,16 @@ namespace Lithium
 				return _vertexDeclaration;
 			}
 
+			/**
+			 * Gets the behavior of the buffer.
+			 *
+			 * \returns The behavior of the buffer.
+			 */
+			inline BufferUsage::Enum getBufferUsage() const
+			{
+				return _bufferUsage;
+			}
+
 		//----------------------------------------------------------------------
 		// Member variables
 		//----------------------------------------------------------------------
@@ -83,6 +104,8 @@ namespace Lithium
 			std::int32_t _vertexCount;
 			/// The vertex declaration
 			const VertexDeclaration& _vertexDeclaration;
+			/// The behavior of the buffer
+			BufferUsage::Enum _bufferUsage;
 
 	} ; // end class VertexBuffer
 

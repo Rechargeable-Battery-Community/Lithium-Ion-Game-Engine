@@ -31,11 +31,20 @@ using namespace Lithium;
 VertexElement::VertexElement()
 : _offset(0)
 , _format(VertexElementFormat::Vector4)
+, _usage(VertexElementUsage::Position)
+, _usageIndex(0)
 { }
 
 //---------------------------------------------------------------------
 
-VertexElement::VertexElement(std::int32_t offset, VertexElementFormat::Enum format)
+VertexElement::VertexElement(
+	std::int32_t offset,
+	VertexElementFormat::Enum format,
+	VertexElementUsage::Enum usage,
+	std::int32_t usageIndex
+)
 : _offset(offset)
 , _format(format)
+, _usage(usage)
+, _usageIndex(usageIndex)
 { }

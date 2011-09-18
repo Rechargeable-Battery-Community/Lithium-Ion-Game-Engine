@@ -28,6 +28,7 @@
 
 #include <Lithium/System/Includes.hpp>
 #include <Lithium/Graphics/VertexElementFormat.hpp>
+#include <Lithium/Graphics/VertexElementUsage.hpp>
 
 namespace Lithium
 {
@@ -39,9 +40,25 @@ namespace Lithium
 
 		public:
 
+			/**
+			 * Creates an instance of the VertexElement class.
+			 */
 			VertexElement();
 
-			VertexElement(std::int32_t offset, VertexElementFormat::Enum format);
+			/**
+			 * Initializes an instance of the VertexElement class.
+			 *
+			 * \param offset Offset from the start of the stream to the start of the vertex data.
+			 * \param format One of several predefined types that define the vertex data size.
+			 * \param usage The intended use of the vertex data.
+			 * \param usageIndex Modifies the usage data to allow the user to specify multiple usage types.
+			 */
+			VertexElement(
+				std::int32_t offset,
+				VertexElementFormat::Enum format,
+				VertexElementUsage::Enum usage,
+				std::int32_t usageIndex = 0
+			);
 
 		//----------------------------------------------------------------------
 		// Properties
@@ -69,6 +86,26 @@ namespace Lithium
 				_format = value;
 			}
 
+			inline VertexElementUsage::Enum getUsage() const
+			{
+				return _usage;
+			}
+
+			inline void setUsage(VertexElementUsage::Enum value)
+			{
+				_usage = value;
+			}
+
+			inline std::int32_t getUsageIndex() const
+			{
+				return _usageIndex;
+			}
+
+			inline void setUsageIndex(std::int32_t value)
+			{
+				_usageIndex = value;
+			}
+
 		//----------------------------------------------------------------------
 		// Member variables
 		//----------------------------------------------------------------------
@@ -77,6 +114,8 @@ namespace Lithium
 
 			std::int32_t _offset;
 			VertexElementFormat::Enum _format;
+			VertexElementUsage::Enum _usage;
+			std::int32_t _usageIndex;
 
 	} ; // end class VertexElement
 

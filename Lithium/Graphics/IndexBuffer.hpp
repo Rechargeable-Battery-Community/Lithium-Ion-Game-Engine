@@ -27,6 +27,8 @@
 #define LITHIUM_INDEX_BUFFER_HPP_INCLUDED
 
 #include <Lithium/Graphics/GraphicsResource.hpp>
+#include <Lithium/Graphics/BufferUsage.hpp>
+#include <Lithium/Graphics/IndexElementSize.hpp>
 
 namespace Lithium
 {
@@ -40,8 +42,82 @@ namespace Lithium
 
 			/**
 			 * Initializes an instance of the IndexBuffer class.
+			 *
+			 * \param device The device to bind to.
+			 * \param data The index data.
+			 * \param indexCount The number of indices.
+			 * \param bufferUsage The buffer behavior.
 			 */
-			IndexBuffer(GraphicsDevice* device);
+			IndexBuffer(
+				GraphicsDevice* device,
+				const std::uint16_t* data,
+				std::size_t indexCount,
+				BufferUsage::Enum bufferUsage = BufferUsage::Static
+			);
+
+			/**
+			 * Initializes an instance of the IndexBuffer class.
+			 *
+			 * \param device The device to bind to.
+			 * \param data The index data.
+			 * \param indexCount The number of indices.
+			 * \param bufferUsage The buffer behavior.
+			 */
+			IndexBuffer(
+				GraphicsDevice* device,
+				const std::uint32_t* data,
+				std::size_t indexCount,
+				BufferUsage::Enum bufferUsage = BufferUsage::Static
+			);
+
+		//----------------------------------------------------------------------
+		// Properties
+		//----------------------------------------------------------------------
+
+		public:
+
+			/**
+			 * Gets the number of indices.
+			 *
+			 * \returns The number of indices.
+			 */
+			inline std::size_t getIndexCount() const
+			{
+				return _indexCount;
+			}
+
+			/**
+			 * Gets the size of the indices.
+			 *
+			 * \returns The size of the indices.
+			 */
+			inline IndexElementSize::Enum getIndexElementSize() const
+			{
+				return _indexElementSize;
+			}
+
+			/**
+			 * Gets the behavior of the buffer.
+			 *
+			 * \returns The behavior of the buffer.
+			 */
+			inline BufferUsage::Enum getBufferUsage() const
+			{
+				return _bufferUsage;
+			}
+
+		//----------------------------------------------------------------------
+		// Member variables
+		//----------------------------------------------------------------------
+
+		private:
+
+			/// The number of indices
+			std::size_t _indexCount;
+			/// The size of the indices
+			IndexElementSize::Enum _indexElementSize;
+			/// The behavior of the buffer
+			BufferUsage::Enum _bufferUsage;
 
 	} ; // end class IndexBuffer
 

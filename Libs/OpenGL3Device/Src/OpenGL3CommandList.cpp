@@ -96,3 +96,21 @@ void GraphicsCommandList::setTextureBinding(const TextureBinding* texture)
 
 	_commands[_currentCommand].texture = texture;
 }
+
+//---------------------------------------------------------------------
+
+void GraphicsCommandList::setVertexBuffer(const VertexBufferBinding* buffer)
+{
+	LITHIUM_ASSERT(!_finished, "Command building has not started");
+
+	_commands[_currentCommand].vertexBuffer = buffer;
+}
+
+//---------------------------------------------------------------------
+
+void GraphicsCommandList::setIndexBuffer(const IndexBufferBinding* buffer)
+{
+	LITHIUM_ASSERT(!_finished, "Command building has not started");
+
+	_commands[_currentCommand].indexBuffer = buffer;
+}

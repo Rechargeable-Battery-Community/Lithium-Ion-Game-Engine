@@ -147,6 +147,16 @@ namespace Lithium
 			void setTextureBinding(const TextureBinding* texture);
 
 		//----------------------------------------------------------------------
+		// Buffer methods
+		//----------------------------------------------------------------------
+
+		public:
+
+			void setVertexBuffer(const VertexBufferBinding* buffer);
+
+			void setIndexBuffer(const IndexBufferBinding* buffer);
+
+		//----------------------------------------------------------------------
 		// Member variables
 		//----------------------------------------------------------------------
 
