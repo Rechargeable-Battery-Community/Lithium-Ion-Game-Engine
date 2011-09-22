@@ -26,9 +26,7 @@
 #ifndef LITHIUM_EFFECT_PASS_HPP_INCLUDED
 #define LITHIUM_EFFECT_PASS_HPP_INCLUDED
 
-#include <Lithium/Graphics/VertexShader.hpp>
-#include <Lithium/Graphics/PixelShader.hpp>
-#include <Lithium/Graphics/GeometryShader.hpp>
+#include <Lithium/Graphics/GraphicsResource.hpp>
 
 namespace Lithium
 {
@@ -39,39 +37,18 @@ namespace Lithium
 			/**
 			 * Creates an instance of the EffectPass class.
 			 */
-			EffectPass();
+			EffectPass(
+				GraphicsDevice* device,
+				const char* vertexSource,
+				std::size_t vertexSourceLength,
+				const char* pixelSource,
+				std::size_t pixelSourceLength
+			);
 
-		public:
-
-			inline const VertexShader* getVertexShader() const
-			{
-				return _vertexShader;
-			}
-
-			void setVertexShader(VertexShader* shader);
-
-			inline const PixelShader* getPixelShader() const
-			{
-				return _pixelShader;
-			}
-
-			void setPixelShader(PixelShader* shader);
-
-			inline const GeometryShader* getGeometryShader() const
-			{
-				return _geometryShader;
-			}
-
-			void setGeometryShader(GeometryShader* shader);
-				
-		private:
-
-			/// The vertex shader associated with the pass
-			VertexShader* _vertexShader;
-			/// The pixel shader associated with the pass
-			PixelShader* _pixelShader;
-			/// The geometry shader associated with the pass
-			GeometryShader* _geometryShader;
+			/**
+			 * Destroys an instance of the EffectPass class.
+			 */
+			~EffectPass();
 
 	} ; // end class EffectPass
 

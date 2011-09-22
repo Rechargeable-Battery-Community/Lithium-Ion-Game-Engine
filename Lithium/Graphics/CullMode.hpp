@@ -28,6 +28,12 @@
 
 namespace Lithium
 {
+	/**
+	 * Defines winding orders that may be used to identify back faces for culling.
+	 *
+	 * \author Don Olmstead
+	 * \version 0.1
+	 */
 	namespace CullMode
 	{
 		/// An enumerated type

@@ -92,12 +92,26 @@ namespace
 		glBindTexture(GL_TEXTURE_2D, texture->id);
 	}
 
+#define BUFFER_OFFSET(i) ((char*)NULL + (i))
+
 	void setVertexBuffer(const VertexBufferBinding* buffer)
-	{		
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, buffer->id);
+
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+		glVertexPointer(3, GL_FLOAT, buffer->stride, BUFFER_OFFSET(buffer->positionOffset));
+		glTexCoordPointer(2, GL_FLOAT, buffer->stride, BUFFER_OFFSET(buffer->texCoordOffset));
+
+
 	}
 
 	void setIndexBuffer(const IndexBufferBinding* buffer)
 	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer->id);
+
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
 	}
 
 } // end anonymous namespace

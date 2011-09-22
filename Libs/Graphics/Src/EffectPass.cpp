@@ -24,30 +24,25 @@
  */
 
 #include <Lithium/Graphics/EffectPass.hpp>
+#include <Lithium/Graphics/GraphicsDevice.hpp>
 using namespace Lithium;
 
 //---------------------------------------------------------------------
 
-EffectPass::EffectPass()
-{ }
-
-//---------------------------------------------------------------------
-
-void EffectPass::setVertexShader(VertexShader* shader)
+EffectPass::EffectPass(
+	GraphicsDevice* device,
+	const char* vertexSource,
+	std::size_t vertexSourceLength,
+	const char* pixelSource,
+	std::size_t pixelSourceLength
+)
 {
-	_vertexShader = shader;
+	device->bindEffectPass(this, vertexSource, vertexSourceLength, pixelSource, pixelSourceLength);
 }
 
 //---------------------------------------------------------------------
 
-void EffectPass::setPixelShader(PixelShader* shader)
+EffectPass::~EffectPass()
 {
-	_pixelShader = shader;
-}
-
-//---------------------------------------------------------------------
-
-void EffectPass::setGeometryShader(GeometryShader* shader)
-{
-	_geometryShader = shader;
+	
 }

@@ -40,6 +40,10 @@ namespace Lithium
 	{
 		GLuint id;
 
+		GLsizei stride;
+		GLint positionOffset;
+		GLint texCoordOffset;
+
 	} ; // end struct VertexBufferBinding
 
 } // end namespace Lithium

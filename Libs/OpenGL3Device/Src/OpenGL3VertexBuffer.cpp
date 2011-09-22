@@ -57,6 +57,13 @@ void GraphicsDevice::bindVertexBuffer(VertexBuffer* buffer, const void* data, st
 	// Create the binding
 	VertexBufferBinding* binding = new VertexBufferBinding();
 	binding->id = id;
+
+	// \todo remove
+	binding->stride = vertexSize;
+	binding->positionOffset = 0;
+	binding->texCoordOffset = 16;
+
+	buffer->setDevice(this, binding);
 }
 
 //---------------------------------------------------------------------

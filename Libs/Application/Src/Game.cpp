@@ -47,9 +47,6 @@ TcpSocket __socket;
 HttpServer* __server;
 
 EffectPass* __effectPass;
-VertexShader* __vertexShader;
-PixelShader* __pixelShader;
-
 BlendState* __blendState;
 DepthStencilState* __depthStencilState;
 RasterizerState* __rasterizerState;
@@ -120,26 +117,16 @@ void Game::initialize()
 
 	__vertexBuffer = new VertexBuffer(_graphicsDevice, vertices, 4);
 
-	std::uint16_t indices[4];
+	std::uint16_t indices[6];
 	indices[0] = 0;
 	indices[1] = 1;
 	indices[2] = 2;
+
 	indices[3] = 3;
+	indices[4] = 0;
+	indices[5] = 2;
 
-	__indexBuffer = new IndexBuffer(_graphicsDevice, indices, 4);
-	/*
-	__vertexShader = new VertexShader();
-	__pixelShader = new PixelShader();
-
-	_graphicsDevice->createVertexShader(__vertexShader);
-	_graphicsDevice->createPixelShader(__pixelShader);
-	
-	__effectPass = new EffectPass();
-	__effectPass->setVertexShader(__vertexShader);
-	__effectPass->setPixelShader(__pixelShader);
-
-	_graphicsDevice->createEffectPass(__effectPass);
-	*/
+	__indexBuffer = new IndexBuffer(_graphicsDevice, indices, 6);
 
 	// \todo REMOVE
 	__server = new HttpServer(8001);
@@ -178,10 +165,13 @@ void Game::draw()
 	context->setDepthStencilState(__depthStencilState);
 	context->setRasterizerState(__rasterizerState);
 	context->setTexture(__texture);
+	context->setVertexBuffer(__vertexBuffer);
+	context->setIndexBuffer(__indexBuffer);
 	context->draw();
 	context->end();
 	_graphicsDevice->execute(context);
 	
+	/*
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	//glFrustum(-8.0, 8.0, -6.0, 6.0, 0.0, 100.0);
@@ -189,6 +179,7 @@ void Game::draw()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	/*
 	glTranslatef(0.0f,0.0f,1.0f);
 	glRotatef(45.0f, 0.0f, 1.0f, 0.0f);
 
@@ -232,4 +223,5 @@ void Game::draw()
 	glEnd();
 
 	glBindTexture(GL_TEXTURE_2D, 0);
+	*/
 }

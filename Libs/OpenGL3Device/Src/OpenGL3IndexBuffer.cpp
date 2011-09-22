@@ -63,6 +63,8 @@ void GraphicsDevice::bindIndexBuffer(IndexBuffer* buffer, const void* data, std:
 	// Create the binding
 	IndexBufferBinding* binding = new IndexBufferBinding();
 	binding->id = id;
+
+	buffer->setDevice(this, binding);
 }
 
 //---------------------------------------------------------------------

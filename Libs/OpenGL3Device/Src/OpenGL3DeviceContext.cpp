@@ -116,3 +116,21 @@ void GraphicsDeviceContext::setTexture(const Texture2D* texture)
 
 	_commandList->setTextureBinding(binding);
 }
+
+//---------------------------------------------------------------------
+
+void GraphicsDeviceContext::setVertexBuffer(const VertexBuffer* buffer)
+{
+	const VertexBufferBinding* binding = (const VertexBufferBinding*)buffer->getResources();
+
+	_commandList->setVertexBuffer(binding);
+}
+
+//---------------------------------------------------------------------
+
+void GraphicsDeviceContext::setIndexBuffer(const IndexBuffer* buffer)
+{
+	const IndexBufferBinding* binding = (const IndexBufferBinding*)buffer->getResources();
+
+	_commandList->setIndexBuffer(binding);
+}

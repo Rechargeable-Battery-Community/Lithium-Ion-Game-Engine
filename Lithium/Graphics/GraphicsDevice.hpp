@@ -144,16 +144,37 @@ namespace Lithium
 			 */
 			void releaseSamplerState(SamplerState* state);
 
-			void createVertexShader(VertexShader* shader);
-			void createPixelShader(PixelShader* shader);
-			void createGeometryShader(GeometryShader* shader);
+		//----------------------------------------------------------------------
+		// EffectPass methods
+		//----------------------------------------------------------------------
 
-			void destroyVertexShader(VertexShader* shader);
-			void destroyPixelShader(PixelShader* shader);
-			void destroyGeometryShader(GeometryShader* shader);
+		private:
 
-			void createEffectPass(EffectPass* effect);
-			void destroyEffectPass(EffectPass* effect);
+			friend class EffectPass;
+
+			/**
+			 * Binds an EffectPass to the device.
+			 *
+			 * \param effectPass The EffectPass to bind.
+			 * \param vertexSource The source code for the vertex shader.
+			 * \param vertexSourceLength The length of the array containing the vertex shader source code.
+			 * \param pixelSource The source code for the pixel shader.
+			 * \param pixelSourceLength The length of the array containing the pixel shader source code.
+			 */
+			void bindEffectPass(
+				EffectPass* effectPass,
+				const char* vertexSource,
+				std::size_t vertexSourceLength,
+				const char* pixelSource,
+				std::size_t pixelSourceLength
+			);
+
+			/**
+			 * Releases an EffectPass from the device.
+			 *
+			 * \param effectPass The EffectPass to release.
+			 */
+			void releaseEffectPass(EffectPass* effectPass);
 
 		//----------------------------------------------------------------------
 		// VertexBuffer methods

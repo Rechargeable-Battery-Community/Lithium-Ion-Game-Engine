@@ -30,6 +30,8 @@
 #include <Lithium/Graphics/DepthStencilState.hpp>
 #include <Lithium/Graphics/RasterizerState.hpp>
 #include <Lithium/Graphics/Texture2D.hpp>
+#include <Lithium/Graphics/VertexBuffer.hpp>
+#include <Lithium/Graphics/IndexBuffer.hpp>
 
 namespace Lithium
 {
@@ -161,6 +163,9 @@ namespace Lithium
 			void setRasterizerState(const RasterizerState* state);
 
 			void setTexture(const Texture2D* texture);
+
+			void setVertexBuffer(const VertexBuffer* buffer);
+			void setIndexBuffer(const IndexBuffer* buffer);
 
 		//----------------------------------------------------------------------
 		// Member variables
