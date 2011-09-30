@@ -1,5 +1,5 @@
 /**
- * \file VertexElementUsage.hpp
+ * \file DepthStencilStateBinding.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,41 +23,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED
-#define LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED
+#ifndef LITHIUM_DEPTH_STENCIL_STATE_BINDING_HPP_INCLUDED
+#define LITHIUM_DEPTH_STENCIL_STATE_BINDING_HPP_INCLUDED
+
+#include "GLPlatform.hpp"
 
 namespace Lithium
 {
 	/**
-	 * Defines usage for vertex elements.
+	 * Represents the binding of a DepthStencilState to OpenGL.
+	 *
+	 * OpenGL doesn't actually bind a DepthStencilState. This binding is
+	 * emulated to keep parity with DirectX.
 	 *
 	 * \author Don Olmstead
 	 * \version 0.1
 	 */
-	namespace VertexElementUsage
+	struct DepthStencilStateBinding
 	{
-		/// An enumerated type
-		enum Enum
-		{
-			/**
-			 * Position data.
-			 */
-			Position,
-			/**
-			 * Texture coordinate data.
-			 */
-			TextureCoordinate,
-			/**
-			 * Vertex normal data.
-			 */
-			Normal,
-			/// The number of enumerations
-			Size
 
-		} ; // end enum Enum
-
-	} // end namespace VertexElementUsage
+	} ; // end struct DepthStencilStateBinding
 
 } // end namespace Lithium
 
-#endif // end LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED
+#endif // end LITHIUM_DEPTH_STENCIL_STATE_BINDING_HPP_INCLUDED

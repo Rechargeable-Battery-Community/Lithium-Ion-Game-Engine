@@ -176,6 +176,8 @@ namespace Lithium
 			 */
 			void releaseEffectPass(EffectPass* effectPass);
 
+
+
 		//----------------------------------------------------------------------
 		// VertexBuffer methods
 		//----------------------------------------------------------------------
@@ -204,6 +206,8 @@ namespace Lithium
 
 		private:
 
+			friend class Texture2D;
+
 			void bindTexture2D(Texture2D* texture, const void* data, BufferUsage::Enum bufferUsage);
 			void releaseTexture2D(Texture2D* texture);
 			void setDataTexture2D(Texture2D* texture, const void* data, std::int32_t x, std::int32_t y, std::int32_t width, std::int32_t height);
@@ -215,8 +219,6 @@ namespace Lithium
 		//----------------------------------------------------------------------
 
 		private:
-
-			friend class Texture2D;
 
 			/// The GraphicsDeviceContext associated with the device
 			GraphicsDeviceContext* _immediateContext;

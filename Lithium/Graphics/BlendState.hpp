@@ -184,6 +184,27 @@ namespace Lithium
 			void setColorSourceBlend(Blend::Enum blend, std::size_t i = 0);
 
 			/**
+			 * Gets the color mask.
+			 *
+			 * \param i The index of the target.
+			 * \returns The color mask.
+			 */
+			inline const ColorWriteChannelFlags& getColorMask(std::size_t i = 0) const
+			{
+				return _renderTargetBlendStates[i].colorWriteChannelFlags;
+			}
+
+			/**
+			 * Gets the number of render targets being used.
+			 *
+			 * \returns The number of render targets being used.
+			 */
+			inline std::size_t getTargetCount() const
+			{
+				return _numTargets;
+			}
+
+			/**
 			 * The number of render targets available.
 			 *
 			 * DirectX 10.1/11 set this to a maximum of 8.

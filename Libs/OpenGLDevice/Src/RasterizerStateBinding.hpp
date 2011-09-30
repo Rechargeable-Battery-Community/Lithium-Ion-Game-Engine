@@ -1,5 +1,5 @@
 /**
- * \file VertexElementUsage.hpp
+ * \file RasterizerStateBinding.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,41 +23,41 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED
-#define LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED
+#ifndef LITHIUM_RASTERIZER_STATE_BINDING_HPP_INCLUDED
+#define LITHIUM_RASTERIZER_STATE_BINDING_HPP_INCLUDED
+
+#include "GLPlatform.hpp"
 
 namespace Lithium
 {
 	/**
-	 * Defines usage for vertex elements.
+	 * Represents the binding of a RasterizerState to OpenGL.
+	 *
+	 * OpenGL doesn't actually bind a RasterizerState. This binding is
+	 * emulated to keep parity with DirectX.
 	 *
 	 * \author Don Olmstead
 	 * \version 0.1
 	 */
-	namespace VertexElementUsage
+	struct RasterizerStateBinding
 	{
-		/// An enumerated type
-		enum Enum
-		{
-			/**
-			 * Position data.
-			 */
-			Position,
-			/**
-			 * Texture coordinate data.
-			 */
-			TextureCoordinate,
-			/**
-			 * Vertex normal data.
-			 */
-			Normal,
-			/// The number of enumerations
-			Size
+		/// Whether scissor testing is enabled
+		GLboolean scissorTestEnabled;
+		/// Whether culling is enabled
+		GLboolean cullEnabled;
+		/// The face to cull
+		GLenum cullFace;
+		/// The orientation of front facing polygons
+		GLenum frontFace;
+		/// How a polygon is filled during rendering
+		GLenum fillMode;
+		/// The depth scale for polygons
+		GLfloat depthScale;
+		/// The depth bias for polygons
+		GLfloat depthBias;
 
-		} ; // end enum Enum
-
-	} // end namespace VertexElementUsage
+	} ; // end struct RasterizerStateBinding
 
 } // end namespace Lithium
 
-#endif // end LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED
+#endif // end LITHIUM_RASTERIZER_STATE_BINDING_HPP_INCLUDED

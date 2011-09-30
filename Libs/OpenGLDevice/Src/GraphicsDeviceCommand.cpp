@@ -1,5 +1,5 @@
 /**
- * \file OpenGL3Command.cpp
+ * \file GraphicsDeviceCommand.cpp
  *
  * \section COPYRIGHT
  *
@@ -23,7 +23,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "OpenGL3Command.hpp"
+#include "GraphicsCommand.hpp"
 #include "GLPlatform.hpp"
 using namespace Lithium;
 

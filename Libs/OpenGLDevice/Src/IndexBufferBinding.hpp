@@ -1,5 +1,5 @@
 /**
- * \file VertexElementUsage.hpp
+ * \file IndexBufferBinding.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,41 +23,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED
-#define LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED
+#ifndef LITHIUM_INDEX_BUFFER_BINDING_HPP_INCLUDED
+#define LITHIUM_INDEX_BUFFER_BINDING_HPP_INCLUDED
+
+#include "GLPlatform.hpp"
 
 namespace Lithium
 {
 	/**
-	 * Defines usage for vertex elements.
+	 * Represents the binding of an IndexBuffer to OpenGL.
 	 *
 	 * \author Don Olmstead
 	 * \version 0.1
 	 */
-	namespace VertexElementUsage
+	struct IndexBufferBinding
 	{
-		/// An enumerated type
-		enum Enum
-		{
-			/**
-			 * Position data.
-			 */
-			Position,
-			/**
-			 * Texture coordinate data.
-			 */
-			TextureCoordinate,
-			/**
-			 * Vertex normal data.
-			 */
-			Normal,
-			/// The number of enumerations
-			Size
+		GLuint id;
 
-		} ; // end enum Enum
-
-	} // end namespace VertexElementUsage
+	} ; // end struct IndexBufferBinding
 
 } // end namespace Lithium
 
-#endif // end LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED
+#endif // end LITHIUM_INDEX_BUFFER_BINDING_HPP_INCLUDED

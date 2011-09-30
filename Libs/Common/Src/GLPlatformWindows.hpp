@@ -47,6 +47,7 @@ extern PFNGLBUFFERSUBDATAPROC glBufferSubData;
 extern PFNGLDELETEBUFFERSPROC glDeleteBuffers;
 extern PFNGLMAPBUFFERPROC glMapBuffer;
 extern PFNGLUNMAPBUFFERPROC glUnmapBuffer;
+extern PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointer;
 
 //----------------------------------------------------------------------
 // Shader functions
@@ -83,6 +84,7 @@ extern PFNGLUNIFORM3FVPROC glUniform3fv;
 extern PFNGLUNIFORM4FVPROC glUniform4fv;
 extern PFNGLUNIFORMMATRIX4FVPROC glUniformMatrix4fv;
 extern PFNGLGETATTRIBLOCATIONPROC glGetAttribLocation;
+extern PFNGLGETACTIVEATTRIBPROC glGetActiveAttrib;
 extern PFNGLVERTEXATTRIB1FPROC glVertexAttrib1f;
 extern PFNGLVERTEXATTRIB1FVPROC glVertexAttrib1fv;
 extern PFNGLVERTEXATTRIB2FVPROC glVertexAttrib2fv;

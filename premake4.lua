@@ -143,15 +143,15 @@ solution "Lithium"
 	project "Lithium.OpenGL3Device"
 		language "C++"
 		kind "StaticLib"
-		location "Libs/OpenGL3Device/Build"
+		location "Libs/OpenGLDevice/Build"
 		files
 		{
 			-- Header files
 			"Lithium/Graphics/GraphicsDevice.hpp",
 			
 			-- Source files
-			"Libs/OpenGL3Device/Src/*.cpp",
-			"Libs/OpenGL3Device/Src/*.hpp"
+			"Libs/OpenGLDevice/Src/*.cpp",
+			"Libs/OpenGLDevice/Src/*.hpp"
 		}
 		links
 		{

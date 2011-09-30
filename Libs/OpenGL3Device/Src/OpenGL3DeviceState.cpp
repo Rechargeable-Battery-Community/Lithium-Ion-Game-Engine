@@ -108,34 +108,6 @@ namespace
 
 //---------------------------------------------------------------------
 
-void GraphicsDevice::bindBlendState(BlendState* state)
-{
-	BlendStateBinding* binding = new BlendStateBinding();
-
-	binding->alphaFunction = __blendFunctionMapping[state->getAlphaBlendFunction()];
-	binding->colorFunction = __blendFunctionMapping[state->getColorBlendFunction()];
-
-	binding->alphaDestination = __blendMapping[state->getAlphaDestinationBlend()];
-	binding->alphaSource      = __blendMapping[state->getAlphaSourceBlend()];
-	binding->colorDestination = __blendMapping[state->getColorDestinationBlend()];
-	binding->colorSource      = __blendMapping[state->getColorSourceBlend()];
-
-	state->setDevice(this, binding);
-}
-
-//---------------------------------------------------------------------
-
-void GraphicsDevice::releaseBlendState(BlendState* state)
-{
-	BlendStateBinding* binding = (BlendStateBinding*)state->getResources();
-
-	delete binding;
-
-	state->setDevice(0, 0);
-}
-
-//---------------------------------------------------------------------
-
 void GraphicsDevice::bindDepthStencilState(DepthStencilState* state)
 {
 	DepthStencilStateBinding* binding = new DepthStencilStateBinding();

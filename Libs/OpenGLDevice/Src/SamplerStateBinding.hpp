@@ -1,5 +1,5 @@
 /**
- * \file VertexElementUsage.hpp
+ * \file SamplerStateBinding.hpp
  *
  * \section COPYRIGHT
  *
@@ -23,41 +23,37 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED
-#define LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED
+#ifndef LITHIUM_SAMPLER_STATE_BINDING_HPP_INCLUDED
+#define LITHIUM_SAMPLER_STATE_BINDING_HPP_INCLUDED
+
+#include "GLPlatform.hpp"
 
 namespace Lithium
 {
 	/**
-	 * Defines usage for vertex elements.
+	 * Represents the binding of a SamplerStateBinding to OpenGL.
+	 *
+	 * OpenGL doesn't actually bind a SamplerStateBinding. This binding is
+	 * emulated to keep parity with DirectX.
 	 *
 	 * \author Don Olmstead
 	 * \version 0.1
 	 */
-	namespace VertexElementUsage
+	struct SamplerStateBinding
 	{
-		/// An enumerated type
-		enum Enum
-		{
-			/**
-			 * Position data.
-			 */
-			Position,
-			/**
-			 * Texture coordinate data.
-			 */
-			TextureCoordinate,
-			/**
-			 * Vertex normal data.
-			 */
-			Normal,
-			/// The number of enumerations
-			Size
+		/// The type of filtering during minification
+		GLenum minFilter;
+		/// The type of filtering during magnification
+		GLenum magFilter;
+		/// The address mode for the the u coordinate
+		GLenum addressModeU;
+		/// The address mode for the the v coordinate
+		GLenum addressModeV;
+		/// The address mode for the the w coordinate
+		GLenum addressModeW;
 
-		} ; // end enum Enum
-
-	} // end namespace VertexElementUsage
+	} ; // end struct SamplerStateBinding
 
 } // end namespace Lithium
 
-#endif // end LITHIUM_VERTEX_ELEMENT_USAGE_HPP_INCLUDED
+#endif // end LITHIUM_SAMPLER_STATE_BINDING_HPP_INCLUDED

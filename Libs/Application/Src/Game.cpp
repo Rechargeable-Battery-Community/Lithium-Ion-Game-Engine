@@ -54,6 +54,27 @@ Texture2D* __texture;
 VertexBuffer* __vertexBuffer;
 IndexBuffer* __indexBuffer;
 
+namespace
+{
+	char* loadFile(const std::string& path, int& length)
+	{
+		std::ifstream file(path);
+
+		if (!file.is_open())
+			return 0;
+
+		file.seekg(0, std::ios::end);
+		length = file.tellg();
+		file.seekg(0, std::ios::beg);
+
+		char* buffer = new char[length];
+
+		file.getline(buffer, length, '\0');
+
+		return buffer;
+	}
+}
+
 //---------------------------------------------------------------------
 
 Game::Game()
@@ -127,6 +148,14 @@ void Game::initialize()
 	indices[5] = 2;
 
 	__indexBuffer = new IndexBuffer(_graphicsDevice, indices, 6);
+
+	int vertexSourceLength;
+	char* vertexSource = loadFile("shaders/texture.vert", vertexSourceLength);
+
+	int pixelSourceLength;
+	char* pixelSource = loadFile("shaders/texture.frag", pixelSourceLength);
+
+	__effectPass = new EffectPass(_graphicsDevice, vertexSource, vertexSourceLength, pixelSource, pixelSourceLength);
 
 	// \todo REMOVE
 	__server = new HttpServer(8001);

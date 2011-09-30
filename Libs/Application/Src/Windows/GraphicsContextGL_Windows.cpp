@@ -82,6 +82,7 @@ PFNGLUNIFORM3FVPROC glUniform3fv = NULL;
 PFNGLUNIFORM4FVPROC glUniform4fv = NULL;
 PFNGLUNIFORMMATRIX4FVPROC glUniformMatrix4fv = NULL;
 PFNGLGETATTRIBLOCATIONPROC glGetAttribLocation = NULL;
+PFNGLGETACTIVEATTRIBPROC glGetActiveAttrib = NULL;
 PFNGLVERTEXATTRIB1FPROC glVertexAttrib1f = NULL;
 PFNGLVERTEXATTRIB1FVPROC glVertexAttrib1fv = NULL;
 PFNGLVERTEXATTRIB2FVPROC glVertexAttrib2fv = NULL;
@@ -151,6 +152,7 @@ void GraphicsAPI::initialize()
 	glUniform4fv = (PFNGLUNIFORM4FVPROC)wglGetProcAddress("glUniform4fv");
 	glUniformMatrix4fv = (PFNGLUNIFORMMATRIX4FVPROC)wglGetProcAddress("glUniformMatrix4fv");
 	glGetAttribLocation = (PFNGLGETATTRIBLOCATIONPROC)wglGetProcAddress("glGetAttribLocation");
+	glGetActiveAttrib = (PFNGLGETACTIVEATTRIBPROC)wglGetProcAddress("glGetActiveAttrib");
 	glVertexAttrib1f = (PFNGLVERTEXATTRIB1FPROC)wglGetProcAddress("glVertexAttrib1f");
 	glVertexAttrib1fv = (PFNGLVERTEXATTRIB1FVPROC)wglGetProcAddress("glVertexAttrib1fv");
 	glVertexAttrib2fv = (PFNGLVERTEXATTRIB2FVPROC)wglGetProcAddress("glVertexAttrib2fv");
